@@ -241,7 +241,7 @@
       { id:"datca", name:"Datça", type:"Stadthafen ★★", lat:36.725, lon:27.687, region:"Datça-Halbinsel",
         desc:"Touristischer, aber authentischer Hafenort mit allem Nötigen. Angelegt wird mit dem Heck an der hölzernen Stadtpier, daneben kann man auch in der Bucht ankern.",
         depth:"4–6 m", underground:"Schlick", windProtection:"Bucht-geschützt", anlegeart:"Heck zur Stadtpier",
-        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona" hat die beste Hafenaussicht, etwas teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Hinter dem Badestrand liegt ein kleiner Süßwassersee.", vhf:null, web:null },
+        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona“ hat die beste Hafenaussicht, etwas teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Hinter dem Badestrand liegt ein kleiner Süßwassersee.", vhf:null, web:null },
       { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", lat:36.667, lon:27.500, region:"Datça-Halbinsel",
         desc:"Ruhiger, einheimisch geprägter Hafen mit wenig Yachttourismus. Beschauliche, fast verträumte Atmosphäre.",
         depth:"3–4 m im Hafen", underground:"Sand / Schlick", windProtection:"Gut, Schutzhafen", anlegeart:"Muring an erneuerter Kaimauer",
@@ -685,6 +685,11 @@
           <KitchenDuty />
           <SpotifyCard />
           <CompassCard />
+          <div className="flex items-center justify-center gap-3 pt-2 pb-1">
+            <span className="h-px w-8 bg-steingrau/25" />
+            <span className="text-sm font-medium tracking-wide text-meeresblau">{APP_TAGLINE}</span>
+            <span className="h-px w-8 bg-steingrau/25" />
+          </div>
         </div>
       );
     }
