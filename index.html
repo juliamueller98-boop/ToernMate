@@ -35,12 +35,29 @@
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.9/babel.min.js"></script>
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQdspOOS4o4tODH7SuXo6z2AT3G03f4=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
   <style>
     html, body { margin: 0; background: #F7F9FA; font-family: 'Poppins', sans-serif; }
     * { -webkit-tap-highlight-color: transparent; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+    /* Leaflet-Revierkarte */
+    .leaflet-container { font-family: 'Poppins', sans-serif; background: #e7f8f7; }
+    .sail-marker { position: relative; width: 20px; height: 20px; transform: translate(-10px,-10px); border: 3px solid #fff; border-radius: 999px 999px 999px 0; background: linear-gradient(135deg,#147A8B,#2BB9B1); box-shadow: 0 6px 14px rgba(0,49,58,0.35); rotate: -45deg; }
+    .sail-marker::after { content: ""; position: absolute; inset: 4px; border-radius: 999px; background: #fff; opacity: 0.86; }
+    .leaflet-tooltip.sail-tooltip { border: 0; border-radius: 999px; padding: 3px 8px; color: #fff; background: #147A8B; box-shadow: 0 6px 16px rgba(0,49,58,0.22); font-weight: 600; }
+    .leaflet-tooltip-top.sail-tooltip::before { border-top-color: #147A8B; }
+    .leaflet-popup-content-wrapper { border-radius: 14px; }
+    .leaflet-popup-content { margin: 12px 14px; font-size: 0.9rem; line-height: 1.35; color: #0D2B45; }
+    .popup-title { display: block; margin-bottom: 5px; color: #147A8B; font-size: 1rem; font-weight: 600; }
+    .popup-tip { margin: 0; }
+    .popup-note { margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(20,122,139,0.18); color: rgba(6,57,67,0.7); font-size: 0.74rem; }
+    .leaflet-control-attribution { font-size: 10px; background: rgba(255,255,255,0.9) !important; }
+    .leaflet-control-attribution a { color: #147A8B; }
   </style>
 </head>
 <body>
@@ -89,11 +106,16 @@
       const start = startOfDay(new Date(TRIP_START + "T00:00:00"));
       return Math.round((startOfDay(new Date()) - start) / 86400000);
     }
-    function isoForDay(n) { const d = new Date(TRIP_START + "T00:00:00"); d.setDate(d.getDate() + (n - 1)); return d.toISOString().slice(0, 10); }
+    function isoForDay(n) { const d = new Date(TRIP_START + "T12:00:00"); d.setDate(d.getDate() + (n - 1)); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
     function fmtDate(iso) {
       if (!iso) return "Datum offen";
-      const wd = ["So","Mo","Di","Mi","Do","Fr","Sa"]; const d = new Date(iso + "T00:00:00");
+      const wd = ["So","Mo","Di","Mi","Do","Fr","Sa"]; const d = new Date(iso + "T12:00:00");
       return wd[d.getDay()] + " " + String(d.getDate()).padStart(2,"0") + "." + String(d.getMonth()+1).padStart(2,"0") + ".";
+    }
+    function fmtDateLong(iso) {
+      if (!iso) return "Datum offen";
+      const wd = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"]; const d = new Date(iso + "T12:00:00");
+      return wd[d.getDay()] + ", " + String(d.getDate()).padStart(2,"0") + "." + String(d.getMonth()+1).padStart(2,"0") + ".";
     }
     function range(n) { const a = []; for (let i = 0; i < n; i++) a.push(i); return a; }
     function shuffle(arr) { const a = arr.slice(); for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
@@ -143,7 +165,7 @@
       { id:"karacaoeren", name:"Karacaören", type:"Restaurantbucht ★★★", lat:36.550, lon:28.883, region:"Golf von Fethiye",
         desc:"Nur per Boot erreichbare Bucht mit familiengeführtem Lokal in dritter Generation. Täglich frischer Fisch, offenes Feuer und eine kleine Sammlung Flaggen aus aller Welt.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen NW", anlegeart:"Muring vorhanden",
-        facilities:["Restaurant (Frischfisch)","Solarstrom","Wasserleitung","Platz für viele Yachten"], tip:"Zur Vorspeise Brot, Salat, Tsatsiki und Tomatengemüse, danach Fisch nach Wahl. Ganzjährig geöffnet.", vhf:null, web:null },
+        facilities:["Restaurant (Frischfisch)","Solarstrom","Wasserleitung","Platz für viele Yachten"], tip:"Can's Restaurant in dritter Generation, bis zu 60 Yachten. Zur Vorspeise Brot, Salat, Tsatsiki und Tomatengemüse, danach Fisch nach Wahl. Ganzjährig geöffnet.", vhf:null, web:null },
       { id:"sarsala", name:"Sarsala Koyu", type:"Restaurantbucht", lat:36.533, lon:28.967, region:"Golf von Fethiye",
         desc:"Ruhige Restaurantbucht mit gutem Schutz aus nördlichen Richtungen. Angenehmer, unaufgeregter Stopp.",
         depth:"5–12 m", underground:"Sand", windProtection:"Gut gegen N/NW", anlegeart:"Anker oder kostenloser Restaurantsteg",
@@ -219,7 +241,7 @@
       { id:"datca", name:"Datça", type:"Stadthafen ★★", lat:36.725, lon:27.687, region:"Datça-Halbinsel",
         desc:"Touristischer, aber authentischer Hafenort mit allem Nötigen. Angelegt wird mit dem Heck an der hölzernen Stadtpier, daneben kann man auch in der Bucht ankern.",
         depth:"4–6 m", underground:"Schlick", windProtection:"Bucht-geschützt", anlegeart:"Heck zur Stadtpier",
-        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Lokal mit der besten Hafenaussicht ist etwas teurer, die türkischen Maultaschen aber die Empfehlung wert.", vhf:null, web:null },
+        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona" hat die beste Hafenaussicht, etwas teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Hinter dem Badestrand liegt ein kleiner Süßwassersee.", vhf:null, web:null },
       { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", lat:36.667, lon:27.500, region:"Datça-Halbinsel",
         desc:"Ruhiger, einheimisch geprägter Hafen mit wenig Yachttourismus. Beschauliche, fast verträumte Atmosphäre.",
         depth:"3–4 m im Hafen", underground:"Sand / Schlick", windProtection:"Gut, Schutzhafen", anlegeart:"Muring an erneuerter Kaimauer",
@@ -239,8 +261,14 @@
     ];
     function harborById(id) { return HARBORS.filter(h => h.id === id)[0] || null; }
 
-    const GUIDE_OVERVIEW = { distance:"ca. 120–150 SM, je nach Buchtenabstechern", length:"10–14 Tage empfohlen",
-      route:"Fethiye → Göcek → Ekincik → Bozburun-/Hisarönü-Golf → Datça → Knidos und zurück" };
+    const GUIDE_OVERVIEW = { route:"Fethiye → Göcek → Ekincik → Bozburun-/Hisarönü-Golf → Datça → Knidos und zurück" };
+    const GUIDE_HARBOR_SECTIONS = [
+      { name:"Sektion 1 · Golf von Fethiye", ids:["fethiye","goecek","kapicreek","karacaoeren","cleopatra","bauernbucht","gemiler","coldwater","sarsala","tersane"] },
+      { name:"Sektion 2 · Göcek → Marmaris", ids:["oeluedeniz","asikoyu","ekincik","piratebay","bozukkale","marmaris"] },
+      { name:"Sektion 3 · Hisarönü-Golf", ids:["dirsek","bencik","selimiye","bozburun","sailorsparadise","orhaniye"] },
+      { name:"Sektion 4 · Datça-Halbinsel", ids:["datca","palamut","mersincik","hayit"] },
+      { name:"Sektion 5 · Knidos (Wendepunkt)", ids:["knidos"] }
+    ];
     const GUIDE_SECTIONS = [
       { title:"Wind & Meltemi (Juli)", body:[
         "Von Mitte Juni bis Mitte September weht nachmittags der Meltemi aus Nordwest, meist 15–25 kn, im Raum Bodrum/Datça auch bis 30 kn.",
@@ -281,36 +309,36 @@
     ];
 
     const COMPASS_QUESTIONS = [
-      "Was macht dich sofort gut gelaunt?",
-      "Was war ein richtig schöner Moment in letzter Zeit?",
-      "Welche Kleinigkeit an anderen Menschen findest du besonders sympathisch?",
-      "Was kannst du besser, als viele denken?",
-      "Wobei vergisst du die Zeit?",
-      "Was würdest du gern wieder öfter machen?",
-      "Welcher Ort tut dir gut?",
-      "Was ist ein Kompliment, das bei dir wirklich hängen bleibt?",
-      "Welche Eigenschaft hättest du gern stärker?",
-      "Was ist etwas, das dich zuverlässig beruhigt?",
+      "Wenn dein Leben einen Untertitel hätte, wie würde er lauten?",
+      "Welcher Song ist dein heimliches Karaoke-Geständnis?",
+      "Was ist die unnötigste Fähigkeit, auf die du insgeheim stolz bist?",
+      "Wenn du ein Boot wärst, welcher Name stünde am Heck?",
+      "Welches Gericht würdest du kochen, um jemanden zu beeindrucken?",
+      "Was war dein peinlichster Moment, über den du heute lachen kannst?",
+      "Welche völlig irrationale Angst hast du?",
+      "Wofür würden dich deine Freunde sofort wiedererkennen, ohne dich zu sehen?",
+      "Welches Talent hättest du gern, das absolut nutzlos ist?",
+      "Was ist dein Lieblings-Snack um drei Uhr nachts?",
+      "Welche Filmfigur beschreibt dich erschreckend gut?",
+      "Was würdest du tun, wenn du einen Tag unsichtbar wärst?",
+      "Welche Meinung von dir lässt andere regelmäßig die Augen verdrehen?",
+      "Was war die beste Entscheidung, die du je spontan getroffen hast?",
+      "Welchen Trend hast du nie verstanden?",
+      "Wobei vergisst du komplett die Zeit?",
+      "Was macht dich sofort gute Laune?",
+      "Welcher Ort fühlt sich für dich wie nach Hause an?",
+      "Was kannst du besser, als die meisten denken?",
+      "Was war zuletzt ein richtig schöner Moment?",
       "Wann fühlst du dich am meisten wie du selbst?",
-      "Was gibt dir gerade viel Energie?",
-      "Was kostet dich gerade mehr Kraft, als man dir ansieht?",
-      "Welche Entscheidung hat dich im Nachhinein stärker geprägt als gedacht?",
-      "Was fällt dir leichter, seit du älter geworden bist?",
-      "Was fällt dir schwerer, als du gern zugibst?",
+      "Was gibt dir gerade richtig viel Energie?",
       "Welche Freundschaft hat dich besonders geprägt?",
+      "Was würdest du deinem jüngeren Ich gern sagen?",
       "Wann fühlst du dich von anderen wirklich verstanden?",
       "Was würdest du gern besser loslassen können?",
-      "Was brauchst du, wenn es dir nicht gut geht?",
-      "Welche Version von dir vermisst du manchmal?",
-      "Welche Angst hält dich manchmal kleiner, als du sein müsstest?",
-      "Was möchtest du in deinem Leben nicht mehr beweisen müssen?",
-      "Welche Wahrheit über dich sprichst du selten laut aus?",
-      "Was würdest du deinem jüngeren Ich gerne sagen?",
-      "Wann fühlst du dich wirklich geliebt?",
-      "Welche Rolle spielst du manchmal, obwohl sie dir nicht guttut?",
-      "Was bedeutet für dich ein gutes Leben?",
+      "Worauf bist du im letzten Jahr stolz geworden?",
+      "Was bedeutet für dich ein richtig guter Tag?",
       "Was wünschst du dir, dass andere besser an dir verstehen?",
-      "Was würdest du ändern, wenn du niemanden enttäuschen könntest?"
+      "Was würdest du sofort tun, wenn Geld keine Rolle spielen würde?"
     ];
 
     const SAIL_BASICS = [
@@ -325,14 +353,16 @@
       { term:"Landleine", text:"Zusätzliche Leine vom Boot an Land, die das Schwojen in engen Buchten verhindert." }
     ];
     const MANEUVERS = [
-      { name:"Mann über Bord (Quickstop)", steps:["Sofort \"Mann über Bord\" rufen, MOB-Knopf am Plotter drücken, eine Person zeigt ununterbrochen auf die Person im Wasser.","Sofort anluven und durch den Wind gehen, Segel back stehen lassen, so bleibt man nah.","Unter Motor oder Segel einen engen Kreis zurück fahren und von Lee anfahren, damit man nicht über die Person treibt.","Person an der Luvseite längsseits nehmen und mit Badeleiter oder Bergehilfe an Bord holen."] },
-      { name:"Römisch-katholisch anlegen (Heck zum Steg)", steps:["Fender und Heckleinen vorbereiten, Crew einteilen.","In ein bis zwei Bootslängen Abstand quer zum Steg den Buganker fallen lassen.","Langsam rückwärts zum Steg, dabei die Ankerkette kontrolliert ausrauschen lassen.","Zwei Heckleinen an Land geben, dann die Kette dichtholen, bis das Boot sicher zwischen Anker und Steg steht."] },
-      { name:"Ankern", steps:["Sandfleck mit genug Schwojraum und passender Tiefe suchen.","Gegen den Wind aufstoppen, Anker fallen lassen und kontrolliert Kette stecken (mindestens 4- bis 5-fache Wassertiefe, bei Böen mehr).","Mit leichtem Rückwärtsschub den Anker einfahren und prüfen, ob er hält (Landmarken peilen).","Bei engen Buchten zusätzlich eine Landleine ausbringen."] },
-      { name:"Beidrehen (Pause auf See)", steps:["Durch den Wind gehen, ohne die Fock umzuholen, so steht sie back.","Das Ruder zur Luvseite legen und festsetzen.","Das Boot legt sich quer und treibt langsam und ruhig, ideal für eine Pause oder bei Starkwind."] }
+      { name:"Wende (Bug durch den Wind)", steps:["Steuermann: \"Klar zur Wende?\" – Crew nimmt Positionen ein und bestätigt: \"Ist klar!\"","Steuermann luvt an und kommandiert beim Drehen: \"Ree!\"","Sobald die Fock killt, auf die neue Seite überholen: \"Hol über die Fock!\" Das Groß wechselt mit.","Auf neuen Amwindkurs steuern und Segel trimmen. Bei manchen Booten die Fock kurz back stehen lassen (\"Halt back die Fock\")."] },
+      { name:"Halse (Heck durch den Wind)", steps:["Steuermann: \"Klar zur Halse?\" – Crew: \"Ist klar!\"","Vor dem Durchschwenken die Großschot dichtholen, damit der Baum nicht durchschlägt (Patenthalse vermeiden).","Beim Wechsel kommandieren: \"Rund achtern!\", dann \"Hol über die Fock!\"","Großschot kontrolliert wieder auffieren und auf den neuen Kurs steuern."] },
+      { name:"Q-Wende / Mann über Bord", steps:["Sofort \"Mann über Bord!\" rufen, MOB-Knopf drücken, eine Person zeigt ununterbrochen auf die Person im Wasser.","Statt einer riskanten Halse die Q-Wende fahren: aus Raumwind anluven bis Amwind, Segel dichtholen, dann eine normale Wende.","Danach wieder abfallen und sich von Lee langsam an die Person heranarbeiten (Aufschießer kurz davor).","Person an der Luvseite längsseits nehmen und mit Badeleiter oder Bergehilfe an Bord holen."] },
+      { name:"Aufschießer (Anlegen, Boje, Stoppen)", steps:["Boot mit dem Bug direkt in den Wind drehen.","Segel langsam fieren und killen lassen, das Boot verliert Fahrt.","Im Wind mit kleinen Ruderkorrekturen die Ausrichtung halten. So legt man an, nimmt eine Boje auf oder \"parkt\" kurz."] },
+      { name:"Reffen (Segelfläche verkleinern)", steps:["Früh reffen, sobald der Wind zunimmt und die Krängung zu groß wird. Lieber einmal zu früh.","Vorsegel über die Rollreffanlage ums Vorstag einrollen.","Großsegel je nach Anlage einrollen (Rollmast/Rollbaum) oder per Bindereff niederholen und am Baum festlegen."] },
+      { name:"Ankern", steps:["Sandfleck mit genug Schwojraum und passender Tiefe suchen, gegen den Wind aufstoppen.","Anker fallen lassen und Kette kontrolliert stecken (im Revier wegen Fallböen eher 5- bis 7-fache Tiefe).","Mit leichtem Rückwärtsschub einfahren und Halt prüfen (Landmarken peilen).","In engen Buchten zusätzlich eine Landleine ausbringen (max. ca. 50 m vom Ufer)."] },
+      { name:"Römisch-katholisch anlegen (Heck zum Steg)", steps:["Fender und Heckleinen vorbereiten, Crew einteilen.","Ein bis zwei Bootslängen quer zum Steg den Buganker fallen lassen.","Langsam rückwärts zum Steg, Kette kontrolliert ausrauschen lassen.","Zwei Heckleinen an Land geben, dann die Kette dichtholen, bis das Boot sicher steht."] }
     ];
     const KNOT_LINKS = [
-      { label:"knotenlernen.de – Knoten Schritt für Schritt", url:"https://knotenlernen.de" },
-      { label:"KlabauterKiste – Seemannsknoten erklärt", url:"https://klabauterkiste.de/seemannsknoten/" }
+      { label:"ADAC Skipper – Die 10 wichtigsten Knoten (mit Video)", url:"https://skipper.adac.de/ratgeber/seemannsknoten-anleitung" }
     ];
     const TR_PHRASES = [
       { tr:"Merhaba", de:"Hallo" }, { tr:"Teşekkür ederim", de:"Danke" }, { tr:"Lütfen", de:"Bitte" },
@@ -350,20 +380,20 @@
 
     /* Etappen: jede Etappe ist eine Fahrt von -> nach mit eigenen Meilen */
     const STAGES_SEED = [
-      { id:"s1",  dateISO:"2026-07-11", von:"",            nach:"Fethiye",        nachId:"fethiye",     miles:0,  note:"Start & Einklarieren", log:"" },
-      { id:"s2",  dateISO:"2026-07-12", von:"Fethiye",     nach:"Göcek",          nachId:"goecek",      miles:8,  note:"", log:"" },
-      { id:"s3",  dateISO:"2026-07-13", von:"Göcek",       nach:"Karacaören",     nachId:"karacaoeren", miles:10, note:"", log:"" },
-      { id:"s4",  dateISO:"2026-07-14", von:"Karacaören",  nach:"Ekincik",        nachId:"ekincik",     miles:22, note:"Lange Etappe, früh los", log:"" },
-      { id:"s5",  dateISO:"2026-07-15", von:"Ekincik",     nach:"Bozukkale",      nachId:"bozukkale",   miles:15, note:"", log:"" },
-      { id:"s6",  dateISO:"2026-07-16", von:"Bozukkale",   nach:"Orhaniye",       nachId:"orhaniye",    miles:16, note:"", log:"" },
-      { id:"s7",  dateISO:"2026-07-17", von:"Orhaniye",    nach:"Datça",          nachId:"datca",       miles:18, note:"Crewwechsel", log:"" },
-      { id:"s8",  dateISO:"2026-07-18", von:"Datça",       nach:"Knidos",         nachId:"knidos",      miles:25, note:"Highlight & Wendepunkt", log:"" },
-      { id:"s9",  dateISO:"2026-07-19", von:"Knidos",      nach:"Palamut Limanı", nachId:"palamut",     miles:6,  note:"", log:"" },
-      { id:"s10", dateISO:"2026-07-20", von:"Palamut",     nach:"Hayıt Bükü",     nachId:"hayit",       miles:12, note:"", log:"" },
-      { id:"s11", dateISO:"2026-07-21", von:"Hayıt Bükü",  nach:"Selimiye Koyu",  nachId:"selimiye",    miles:18, note:"", log:"" },
-      { id:"s12", dateISO:"2026-07-22", von:"Selimiye",    nach:"Bencik Bay",     nachId:"bencik",      miles:10, note:"", log:"" },
-      { id:"s13", dateISO:"2026-07-23", von:"Bencik Bay",  nach:"Göcek",          nachId:"goecek",      miles:30, note:"Lange Etappe zurück", log:"" },
-      { id:"s14", dateISO:"2026-07-24", von:"Göcek",       nach:"Fethiye",        nachId:"fethiye",     miles:8,  note:"Letzte Nacht vor Ausklarieren", log:"" }
+      { id:"s1",  dateISO:"2026-07-11", von:"Fethiye",      nach:"Cleopatra's Bath Bay", nachId:"cleopatra",   miles:0, note:"Start & Einklarieren in Fethiye, danach kurze erste Etappe", log:"" },
+      { id:"s2",  dateISO:"2026-07-12", von:"Cleopatra",    nach:"Göcek",                nachId:"goecek",      miles:0, note:"Julia kommt dazu (Flughafen Dalaman)", log:"" },
+      { id:"s3",  dateISO:"2026-07-13", von:"Göcek",        nach:"Ekincik",              nachId:"ekincik",     miles:0, note:"", log:"" },
+      { id:"s4",  dateISO:"2026-07-14", von:"Ekincik",      nach:"Bozukkale",            nachId:"bozukkale",   miles:0, note:"", log:"" },
+      { id:"s5",  dateISO:"2026-07-15", von:"Bozukkale",    nach:"Dirsek Bükü",          nachId:"dirsek",      miles:0, note:"", log:"" },
+      { id:"s6",  dateISO:"2026-07-16", von:"Dirsek Bükü",  nach:"Selimiye Koyu",        nachId:"selimiye",    miles:0, note:"", log:"" },
+      { id:"s7",  dateISO:"2026-07-17", von:"Selimiye",     nach:"Datça",                nachId:"datca",       miles:0, note:"Crewwechsel: Malte & Melina ab, Kathi & Jonas dazu", log:"" },
+      { id:"s8",  dateISO:"2026-07-18", von:"Datça",        nach:"Knidos",               nachId:"knidos",      miles:0, note:"Ben reist ab · Highlight & Wendepunkt", log:"" },
+      { id:"s9",  dateISO:"2026-07-19", von:"Knidos",       nach:"Palamut Limanı",       nachId:"palamut",     miles:0, note:"", log:"" },
+      { id:"s10", dateISO:"2026-07-20", von:"Palamut",      nach:"Hayıt Bükü",           nachId:"hayit",       miles:0, note:"", log:"" },
+      { id:"s11", dateISO:"2026-07-21", von:"Hayıt Bükü",   nach:"Mersincik",            nachId:"mersincik",   miles:0, note:"", log:"" },
+      { id:"s12", dateISO:"2026-07-22", von:"Mersincik",    nach:"Bencik Bay",           nachId:"bencik",      miles:0, note:"", log:"" },
+      { id:"s13", dateISO:"2026-07-23", von:"Bencik Bay",   nach:"Göcek",                nachId:"goecek",      miles:0, note:"Längere Etappe zurück", log:"" },
+      { id:"s14", dateISO:"2026-07-24", von:"Göcek",        nach:"Fethiye",              nachId:"fethiye",     miles:0, note:"Letzte Nacht vor dem Ausklarieren", log:"" }
     ];
 
     /* Listen-Startbelegung. header:true = Zwischenüberschrift (nicht abhakbar) */
@@ -502,8 +532,8 @@
             <button onClick={() => setDay((shownDay || 1) - 1)} className="w-9 h-9 rounded-full bg-wolkenweiss text-tiefblau flex items-center justify-center"><IcChevLeft size={20} /></button>
             <div className="text-center">
               {shownDay ? (
-                <div><div className="text-lg font-semibold text-tiefblau leading-none">Tag {shownDay} von {TRIP_DAYS}</div>
-                  <div className="text-xs text-steingrau mt-0.5">{fmtDate(isoForDay(shownDay))} · {d.manual != null ? "manuell" : "automatisch"}</div></div>
+                <div><div className="text-lg font-semibold text-tiefblau leading-tight">{fmtDateLong(isoForDay(shownDay))}</div>
+                  <div className="text-xs text-steingrau mt-0.5">Tag {shownDay} von {TRIP_DAYS} · {d.manual != null ? "manuell" : "automatisch"}</div></div>
               ) : (
                 <div><div className="text-sm font-semibold text-tiefblau">{d.auto < 0 ? "Törn startet " + fmtDate(TRIP_START) : "Törn beendet"}</div>
                   <div className="text-xs text-steingrau mt-0.5">Tag manuell wählen, um reinzuschauen</div></div>
@@ -536,7 +566,7 @@
 
     function TodayStage(props) {
       const d = useDay();
-      const [stages] = useLocalStorage("tm_stages", STAGES_SEED);
+      const [stages] = useLocalStorage("tm_stages_v2", STAGES_SEED);
       const stage = (d.index >= 0 && d.index < stages.length) ? stages[d.index] : null;
       return (
         <Card className="p-5">
@@ -587,12 +617,12 @@
       const c = counts();
       return (
         <Card className="p-5">
-          <SectionHead bg="bg-sonnenorange" icon={<IcUtensils size={20} />} title="Küchendienst" sub={"Anwesend: " + present.length + " Personen"} />
+          <SectionHead bg="bg-sonnenorange" icon={<IcUtensils size={20} />} title="Abwasch-Dienst" sub={"Anwesend: " + present.length + " Personen"} />
           <div className="text-center py-4 bg-wolkenweiss rounded-xl mb-3">
-            <div className="text-xs text-steingrau mb-1">{flash ? (rolling ? "wird ausgewürfelt …" : "Heute kocht") : "Noch nicht gewürfelt"}</div>
+            <div className="text-xs text-steingrau mb-1">{flash ? (rolling ? "wird ausgewürfelt …" : "Heute spült") : "Noch nicht gewürfelt"}</div>
             <div className="text-2xl font-semibold text-tiefblau min-h-[2rem]">{flash || "—"}</div>
           </div>
-          <button onClick={roll} disabled={rolling} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition disabled:opacity-60"><IcDice size={20} /> {rolling ? "Würfelt …" : "Küchendienst auswürfeln"}</button>
+          <button onClick={roll} disabled={rolling} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition disabled:opacity-60"><IcDice size={20} /> {rolling ? "Würfelt …" : "Abwasch auswürfeln"}</button>
           <div className="mt-4">
             <div className="text-xs font-semibold text-steingrau uppercase tracking-wide mb-2">Bisher dran gewesen</div>
             <div className="flex flex-wrap gap-2">{present.map(n => <span key={n} className="text-xs px-2.5 py-1 rounded-full bg-seegruen/40 text-tiefblau">{n} · {c[n]}×</span>)}</div>
@@ -746,7 +776,7 @@
     }
     function TabEtappen() {
       const d = useDay();
-      const [stages, setStages] = useLocalStorage("tm_stages", STAGES_SEED);
+      const [stages, setStages] = useLocalStorage("tm_stages_v2", STAGES_SEED);
       function saveAt(i, ns) { setStages(stages.map((s, k) => k === i ? ns : s)); }
       function del(i) { setStages(stages.filter((s, k) => k !== i)); }
       function move(i, dir) { const j = i + dir; if (j < 0 || j >= stages.length) return; const a = stages.slice(); const t = a[i]; a[i] = a[j]; a[j] = t; setStages(a); }
@@ -760,10 +790,13 @@
         <div className="space-y-3">
           <Card className="p-4 bg-meeresblau text-white">
             <div className="font-semibold">Etappen · {stages.length} Tage</div>
-            <div className="text-sm text-seegruen mt-0.5">ca. {totalMiles} SM gesamt</div>
-            <div className="text-xs text-white/70 mt-2">Jede Etappe ist eine Fahrt „von → nach" mit eigenen Meilen. Aufklappen für Logbuch und Bearbeiten, Reihenfolge mit den Pfeilen ändern.</div>
+            <div className="text-xs text-white/70 mt-1">Jede Etappe ist eine Fahrt „von → nach". Meilen selbst eintragen. Aufklappen für Logbuch und Bearbeiten, Reihenfolge mit den Pfeilen ändern.</div>
           </Card>
           {stages.map((s, i) => <StageCard key={s.id} stage={s} num={i + 1} isToday={d.index === i} first={i === 0} last={i === stages.length - 1} onSave={(ns) => saveAt(i, ns)} onDelete={() => del(i)} onUp={() => move(i, -1)} onDown={() => move(i, 1)} />)}
+          <Card className="p-4 flex items-center justify-between">
+            <span className="text-sm text-steingrau">Gesamt</span>
+            <span className="font-semibold text-tiefblau">{totalMiles} SM</span>
+          </Card>
           <button onClick={add} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition"><IcPlus size={20} /> Etappe hinzufügen</button>
           <button onClick={() => { if (confirm("Etappen auf die Standard-Planung zurücksetzen? Eigene Einträge gehen verloren.")) setStages(STAGES_SEED); }} className="w-full text-xs text-steingrau underline py-1">Auf Standard-Planung zurücksetzen</button>
         </div>
@@ -774,29 +807,53 @@
        TAB: SEGELGUIDE
        ============================================================ */
     function RevierMap(props) {
-      const lons = HARBORS.map(h => h.lon), lats = HARBORS.map(h => h.lat);
-      const lonMin = Math.min.apply(null, lons), lonMax = Math.max.apply(null, lons);
-      const latMin = Math.min.apply(null, lats), latMax = Math.max.apply(null, lats);
-      const W = 1000, H = 560, pad = 50;
-      function X(lon) { return pad + (lon - lonMin) / (lonMax - lonMin) * (W - 2 * pad); }
-      function Y(lat) { return pad + (latMax - lat) / (latMax - latMin) * (H - 2 * pad); }
-      const routeIds = STAGES_SEED.map(s => s.nachId);
-      const routePts = routeIds.map(id => harborById(id)).filter(Boolean).map(h => X(h.lon) + "," + Y(h.lat)).join(" ");
-      const labelIds = ["fethiye","goecek","marmaris","ekincik","datca","knidos","bozukkale"];
+      const ref = useRef(null);
+      const mapRef = useRef(null);
+      const [failed, setFailed] = useState(false);
+      useEffect(() => {
+        let cancelled = false, tries = 0;
+        function init() {
+          if (cancelled) return;
+          if (!window.L) { tries++; if (tries > 50) { setFailed(true); return; } setTimeout(init, 120); return; }
+          if (mapRef.current || !ref.current) return;
+          const L = window.L;
+          const map = L.map(ref.current, { center:[36.69,28.23], zoom:9, zoomControl:true, attributionControl:false, preferCanvas:true });
+          mapRef.current = map;
+          L.control.attribution({ prefix:false, position:"bottomright" }).addTo(map);
+          L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap-Mitwirkende</a>' }).addTo(map);
+          const icon = L.divIcon({ className:"", html:'<span class="sail-marker"></span>', iconSize:[20,20], iconAnchor:[10,18], popupAnchor:[0,-16], tooltipAnchor:[0,-18] });
+          const pts = [];
+          HARBORS.forEach(h => {
+            const ll = [h.lat, h.lon]; pts.push(ll);
+            const m = L.marker(ll, { icon: icon, title: h.name }).addTo(map);
+            m.bindPopup('<strong class="popup-title">' + h.name + '</strong><p class="popup-tip"><strong>Tipp:</strong> ' + h.tip + '</p><div class="popup-note">Hinweis: nicht zur Navigation verwenden.</div>');
+            m.bindTooltip(h.name, { direction:"top", className:"sail-tooltip", opacity:0.95 });
+            m.on("click", () => { if (props.onSelect) props.onSelect(h.name); });
+          });
+          const routeLL = STAGES_SEED.map(s => harborById(s.nachId)).filter(Boolean).map(h => [h.lat, h.lon]);
+          L.polyline(routeLL, { color:"#063943", weight:8, opacity:0.22, lineJoin:"round" }).addTo(map);
+          const route = L.polyline(routeLL, { color:"#2BB9B1", weight:4, opacity:0.94, lineJoin:"round" }).addTo(map);
+          const start = harborById("fethiye");
+          L.circleMarker([start.lat, start.lon], { radius:8, color:"#fff", weight:3, fillColor:"#147A8B", fillOpacity:1 }).addTo(map).bindTooltip("Start / Ziel: Fethiye", { direction:"top", className:"sail-tooltip", opacity:0.95 });
+          map.fitBounds(L.latLngBounds(pts).pad(0.12), { maxZoom:10 });
+          map._routeBounds = route.getBounds().pad(0.12);
+          setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 250);
+        }
+        init();
+        return () => { cancelled = true; if (mapRef.current) { try { mapRef.current.remove(); } catch (e) {} mapRef.current = null; } };
+      }, []);
+      function fitRoute() { const m = mapRef.current; if (m && m._routeBounds) m.fitBounds(m._routeBounds, { maxZoom:10 }); }
+      if (failed) {
+        return <div className="bg-wolkenweiss rounded-xl p-4 text-sm text-steingrau">Die interaktive Karte konnte nicht geladen werden (Leaflet/OpenStreetMap nicht erreichbar). Bitte Internetverbindung prüfen und neu laden.</div>;
+      }
       return (
-        <svg viewBox={"0 0 " + W + " " + H} width="100%" style={{ display:"block", borderRadius:"12px", background:"#EAF4F3" }}>
-          <polyline points={routePts} fill="none" stroke="#FFB357" strokeWidth="3" strokeDasharray="2 9" strokeLinecap="round" />
-          {HARBORS.map(h => {
-            const sel = props.selected === h.name;
-            const isLabel = labelIds.indexOf(h.id) >= 0;
-            return (
-              <g key={h.id} onClick={() => props.onSelect(h.name)} style={{ cursor:"pointer" }}>
-                <circle cx={X(h.lon)} cy={Y(h.lat)} r={sel ? 11 : 7} fill={sel ? "#FFB357" : "#147A8B"} stroke="#fff" strokeWidth="2" />
-                {(isLabel || sel) && <text x={X(h.lon)} y={Y(h.lat) - 14} textAnchor="middle" fontSize="20" fontWeight="600" fill="#0D2B45">{h.name}</text>}
-              </g>
-            );
-          })}
-        </svg>
+        <div>
+          <div ref={ref} style={{ height: 380, width:"100%", borderRadius:"12px", overflow:"hidden" }} />
+          <div className="flex items-center justify-between gap-2 mt-2">
+            <button onClick={fitRoute} className="flex items-center gap-1.5 text-xs font-medium text-meeresblau"><IcRoute size={15} /> Route anzeigen</button>
+            <span className="text-[10px] text-steingrau">Karte © OpenStreetMap-Mitwirkende</span>
+          </div>
+        </div>
       );
     }
     function HarborDetail(props) {
@@ -848,13 +905,12 @@
         <div className="space-y-3">
           <Card className="p-4 bg-tiefblau text-white">
             <div className="font-semibold">Segelguide · Fethiye – Datça</div>
-            <div className="text-sm text-seegruen mt-0.5">{GUIDE_OVERVIEW.distance} · {GUIDE_OVERVIEW.length}</div>
-            <div className="text-xs text-white/70 mt-2">{GUIDE_OVERVIEW.route}</div>
+            <div className="text-xs text-white/70 mt-1">{GUIDE_OVERVIEW.route}</div>
           </Card>
 
           <Card className="p-3">
-            <RevierMap selected={selected} onSelect={selectFromMap} />
-            <div className="text-[11px] text-steingrau mt-2 px-1">Schematische Übersicht, nicht maßstabsgetreu und nicht zur Navigation. Tippe einen Punkt an, um die Bucht unten zu finden.</div>
+            <RevierMap onSelect={selectFromMap} />
+            <div className="text-[11px] text-steingrau mt-2 px-1">Tippe einen Punkt an, um die Bucht unten zu finden. Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</div>
           </Card>
 
           <div className="flex items-center gap-2 bg-white rounded-xl px-3 shadow-sm">
@@ -863,11 +919,18 @@
             {query && <button onClick={() => { setQuery(""); setSelected(null); }} className="text-steingrau text-sm">×</button>}
           </div>
 
-          <div className="text-xs font-semibold text-steingrau uppercase tracking-wide px-1">Buchten & Häfen ({filtered.length})</div>
-          <div className="space-y-2">
-            {filtered.map(h => <HarborRow key={h.id} harbor={h} forceOpen={selected === h.name} />)}
-            {filtered.length === 0 && <div className="text-sm text-steingrau px-1">Nichts gefunden.</div>}
-          </div>
+          <div className="text-xs font-semibold text-steingrau uppercase tracking-wide px-1">Buchten & Häfen</div>
+          {GUIDE_HARBOR_SECTIONS.map((sec, si) => {
+            const rows = sec.ids.map(id => harborById(id)).filter(h => h && (!q || h.name.toLowerCase().indexOf(q) >= 0 || h.region.toLowerCase().indexOf(q) >= 0 || (h.type && h.type.toLowerCase().indexOf(q) >= 0)));
+            if (rows.length === 0) return null;
+            return (
+              <div key={si} className="space-y-2">
+                <div className="text-xs font-semibold text-meeresblau px-1 pt-1">{sec.name}</div>
+                {rows.map(h => <HarborRow key={h.id} harbor={h} forceOpen={selected === h.name} />)}
+              </div>
+            );
+          })}
+          {q && GUIDE_HARBOR_SECTIONS.every(sec => sec.ids.map(harborById).filter(h => h && (h.name.toLowerCase().indexOf(q) >= 0 || h.region.toLowerCase().indexOf(q) >= 0 || (h.type && h.type.toLowerCase().indexOf(q) >= 0))).length === 0) && <div className="text-sm text-steingrau px-1">Nichts gefunden.</div>}
 
           <div className="text-xs font-semibold text-steingrau uppercase tracking-wide px-1 pt-2">Weitere Informationen</div>
           {GUIDE_SECTIONS.map((sec, i) => (
@@ -942,12 +1005,12 @@
       return (
         <div className="space-y-4">
           <div className="text-xs text-steingrau bg-white rounded-xl p-3">
-            <span className="font-semibold text-tiefblau">Geteilt vs. persönlich:</span> Geteilte Listen (Einkauf, Crew-Ausrüstung, Gerichte, Boots-Check) sollen für die ganze Crew gelten, persönliche (Packliste) nur für dich. Echtes geräteübergreifendes Synchronisieren kommt mit der Firebase-Anbindung. Aktuell werden alle Listen noch lokal auf deinem Gerät gespeichert.
+            <span className="font-semibold text-tiefblau">Geteilt vs. persönlich:</span> Geteilte Listen (Einkauf, Gerichte, Boots-Check, Crew-Ausrüstung) gelten für die ganze Crew, die persönliche Packliste nur für dich.
           </div>
           <CheckList storageKey="tm_shopping" title="Einkaufsliste" scope="shared" iconBg="bg-sonnenorange" icon={<IcBasket size={20} />} seed={SHOP_SEED} />
-          <CheckList storageKey="tm_crewgear" title="Mitbringen – Crew-Ausrüstung" scope="shared" iconBg="bg-meeresblau" icon={<IcAnchor size={20} />} seed={CREWGEAR_SEED} />
           <CheckList storageKey="tm_meals" title="Gerichte" scope="shared" iconBg="bg-tuerkis" icon={<IcUtensils size={20} />} seed={MEALS_SEED} />
           <CheckList storageKey="tm_boatcheck" title="Boots-Checkliste" scope="shared" iconBg="bg-tiefblau" icon={<IcCheck size={20} />} seed={BOATCHECK_SEED} />
+          <CheckList storageKey="tm_crewgear" title="Mitbringen – Crew-Ausrüstung" scope="shared" iconBg="bg-meeresblau" icon={<IcAnchor size={20} />} seed={CREWGEAR_SEED} />
           <CheckList storageKey="tm_packing" title="Packliste" scope="individual" iconBg="bg-steingrau" icon={<IcCheck size={20} />} seed={PACK_SEED} />
         </div>
       );
@@ -1004,7 +1067,7 @@
             <Converter />
           </Collapsible>
           <Collapsible bg="bg-meeresblau" icon={<IcExternal size={20} />} title="Knoten lernen">
-            <div className="text-sm text-steingrau mb-2">Die wichtigsten an Bord: Palstek, Webleinstek, Kreuzknoten, Achtknoten und Klampe belegen. Anleitungen:</div>
+            <div className="text-sm text-steingrau mb-2">Die wichtigsten an Bord: Palstek, Webleinstek (Mastwurf), Kreuzknoten, Achtknoten, Rundtörn mit zwei halben Schlägen und Klampe belegen. Beim ADAC gibt es alle mit Schritt-für-Schritt-Video:</div>
             <div className="space-y-2">{KNOT_LINKS.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-meeresblau"><IcExternal size={16} /> {l.label}</a>)}</div>
           </Collapsible>
           <Collapsible bg="bg-tuerkis" icon={<IcVolume size={20} />} title="Türkisch für an Bord">
@@ -1034,14 +1097,15 @@
     function LegalFooter() {
       const [open, setOpen] = useState(false);
       return (
-        <div className="mt-6 mb-2">
+        <div className="mt-6 mb-2 text-center">
           <button onClick={() => setOpen(!open)} className="text-xs text-steingrau underline">Rechtlicher Hinweis & Datenschutz</button>
           {open && (
-            <div className="mt-2 text-xs text-steingrau space-y-2 bg-white rounded-xl p-4">
+            <div className="mt-2 text-xs text-steingrau space-y-2 bg-white rounded-xl p-4 text-left">
               <p>Diese App ist eine private, nicht-kommerzielle Anwendung und ausschließlich für den persönlichen Gebrauch einer geschlossenen Reisegruppe gedacht.</p>
               <p>Es werden keine personenbezogenen Daten an Dritte weitergegeben oder auf fremden Servern abgelegt. Alle Eingaben verbleiben lokal im Browser (localStorage) auf dem jeweiligen Gerät.</p>
               <p>Die App ist nicht öffentlich zugänglich und richtet sich nur an eingeladene Nutzerinnen und Nutzer.</p>
               <p>Sämtliche Inhalte wurden selbst verfasst oder aus öffentlich zugänglichen Quellen zusammengetragen und in eigenen Worten neu formuliert. Es werden keine urheberrechtlich geschützten Texte oder Bilder Dritter verwendet.</p>
+              <p><span className="font-semibold text-tiefblau">Interaktive Karte:</span> Die Revierkarte nutzt die Open-Source-Bibliothek Leaflet (© Volodymyr Agafonkin und Mitwirkende), die unter der BSD-2-Clause-Lizenz steht. Deren Nutzung und Weiterverbreitung ist erlaubt, sofern die Lizenz- und Copyright-Hinweise erhalten bleiben; die vollständige Lizenz ist unter leafletjs.com verfügbar. Das Kartenmaterial stammt von OpenStreetMap (© OpenStreetMap-Mitwirkende) und steht unter der Open Database License (ODbL). Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</p>
             </div>
           )}
         </div>
