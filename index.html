@@ -40,9 +40,9 @@
   </script>
 
   <!-- React 18 + Babel (CDN, kein Build) -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.9/babel.min.js"></script>
 
   <style>
     html, body { margin: 0; background: #F7F9FA; font-family: 'Poppins', sans-serif; }
@@ -53,9 +53,14 @@
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div style="font-family:'Poppins',sans-serif;color:#64748B;max-width:480px;margin:80px auto;text-align:center;padding:0 24px">
+      TörnMate lädt …
+    </div>
+  </div>
 
-  <script type="text/babel" data-presets="react">
+  <!-- App-Quelltext: wird NICHT automatisch ausgefuehrt, sondern unten kontrolliert transpiliert -->
+  <script type="text/plain" id="appsrc">
     const { useState, useEffect, useRef, useMemo } = React;
 
     /* ============================================================
@@ -1032,6 +1037,51 @@
     }
 
     ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+
+  <!-- Boot: CDN-Globals pruefen, JSX transpilieren, Fehler sichtbar machen -->
+  <script>
+    (function () {
+      function show(html) {
+        var r = document.getElementById("root");
+        if (r) r.innerHTML =
+          '<div style="font-family:Poppins,sans-serif;max-width:520px;margin:48px auto;padding:24px;color:#0D2B45;line-height:1.5">' + html + '</div>';
+      }
+      window.addEventListener("error", function (e) {
+        if (window.__tmReady) return;
+        var msg = (e && e.message) ? e.message : String(e);
+        show('<b style="color:#147A8B">TörnMate konnte nicht starten</b><br><br>' +
+          '<code style="white-space:pre-wrap;display:block;background:#F7F9FA;border-radius:8px;padding:12px;color:#b00020;font-size:13px">' +
+          msg + '</code><br>Falls hier von React, ReactDOM oder Babel die Rede ist, lag es an der Internet- bzw. CDN-Verbindung &ndash; einfach neu laden. Andernfalls schick mir diese Meldung als Screenshot.');
+      });
+      var tries = 0;
+      function boot() {
+        tries++;
+        if (!(window.React && window.ReactDOM && window.Babel)) {
+          if (tries > 100) {
+            show('<b style="color:#147A8B">Bibliotheken nicht geladen</b><br><br>' +
+              'React, ReactDOM oder Babel konnte nicht vom CDN geladen werden. Bitte Internetverbindung pruefen und die Seite neu laden. ' +
+              'Falls ein Adblocker oder Firmen-/Schul-Netzwerk aktiv ist, kann dieser die CDN-Skripte (jsdelivr.net) blockieren.');
+            return;
+          }
+          setTimeout(boot, 100);
+          return;
+        }
+        try {
+          var src = document.getElementById("appsrc").textContent;
+          var out = Babel.transform(src, { presets: ["react"], sourceType: "script" }).code;
+          (0, eval)(out);
+          window.__tmReady = true;
+        } catch (err) {
+          var m = (err && err.message) ? err.message : String(err);
+          show('<b style="color:#147A8B">Fehler im App-Code</b><br><br>' +
+            '<code style="white-space:pre-wrap;display:block;background:#F7F9FA;border-radius:8px;padding:12px;color:#b00020;font-size:13px">' +
+            m + '</code>');
+        }
+      }
+      if (document.readyState !== "loading") boot();
+      else document.addEventListener("DOMContentLoaded", boot);
+    })();
   </script>
 </body>
 </html>
