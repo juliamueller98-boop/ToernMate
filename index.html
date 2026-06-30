@@ -503,6 +503,7 @@
           <button onClick={() => setOpen(!open)} className="w-full flex items-center gap-3 p-4 text-left">
             <IconCircle bg={props.bg} s={36}>{props.icon}</IconCircle>
             <div className="flex-1 font-semibold text-tiefblau">{props.title}</div>
+            {props.right}
             <span className={"text-steingrau transition-transform " + (open ? "rotate-180" : "")}><IcChevron size={20} /></span>
           </button>
           {open && <div className="px-4 pb-4">{props.children}</div>}
@@ -924,16 +925,9 @@
       function remove(id) { setItems(items.filter(it => it.id !== id)); }
       const real = items.filter(it => !it.header);
       const done = real.filter(it => it.done).length;
-      const scopeBadge = props.scope === "shared"
-        ? <span className="text-[10px] px-2 py-0.5 rounded-full bg-seegruen/50 text-meeresblau">geteilt</span>
-        : <span className="text-[10px] px-2 py-0.5 rounded-full bg-sand text-tiefblau">persönlich</span>;
       const visible = items.filter(it => it.header || !it.done || showDone);
       return (
-        <Card className="p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <IconCircle bg={props.iconBg}>{props.icon}</IconCircle>
-            <div className="flex-1"><div className="flex items-center gap-2"><span className="font-semibold text-tiefblau">{props.title}</span>{scopeBadge}</div></div>
-          </div>
+        <div>
           <div className="mb-4"><ProgressBar done={done} total={real.length} /></div>
           <div className="flex gap-2 mb-3">
             <input value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") add(); }} placeholder="Hinzufügen …" className="flex-1 rounded-xl bg-wolkenweiss border border-wolkenweiss px-3 py-2 text-sm text-tiefblau outline-none focus:border-tuerkis" />
@@ -957,20 +951,35 @@
           {done > 0 && (
             <button onClick={() => setShowDone(!showDone)} className="mt-3 text-xs text-meeresblau">{showDone ? "Erledigte ausblenden" : done + " erledigte anzeigen"}</button>
           )}
-        </Card>
+        </div>
       );
+    }
+    function scopeBadge(scope) {
+      return scope === "shared"
+        ? <span className="text-[10px] px-2 py-0.5 rounded-full bg-seegruen/50 text-meeresblau">geteilt</span>
+        : <span className="text-[10px] px-2 py-0.5 rounded-full bg-sand text-tiefblau">persönlich</span>;
     }
     function TabListen() {
       return (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="text-xs text-steingrau bg-white rounded-xl p-3">
-            <span className="font-semibold text-tiefblau">Geteilt vs. persönlich:</span> Geteilte Listen (Einkauf, Gerichte, Boots-Check, Crew-Ausrüstung) gelten für die ganze Crew, die persönliche Packliste nur für dich.
+            <span className="font-semibold text-tiefblau">Geteilt vs. persönlich:</span> Geteilte Listen (Einkauf, Gerichte, Boots-Check, Crew-Ausrüstung) gelten für die ganze Crew, die persönliche Packliste nur für dich. Tippe eine Liste an, um sie aufzuklappen.
           </div>
-          <CheckList storageKey="tm_shopping_v2" title="Einkaufsliste" scope="shared" iconBg="bg-sonnenorange" icon={<IcBasket size={20} />} seed={SHOP_SEED} />
-          <CheckList storageKey="tm_meals_v2" title="Gerichte" scope="shared" iconBg="bg-tuerkis" icon={<IcUtensils size={20} />} seed={MEALS_SEED} />
-          <CheckList storageKey="tm_boatcheck_v2" title="Boots-Checkliste" scope="shared" iconBg="bg-tiefblau" icon={<IcCheck size={20} />} seed={BOATCHECK_SEED} />
-          <CheckList storageKey="tm_crewgear_v2" title="Mitbringen – Crew-Ausrüstung" scope="shared" iconBg="bg-meeresblau" icon={<IcAnchor size={20} />} seed={CREWGEAR_SEED} />
-          <CheckList storageKey="tm_packing_v2" title="Packliste" scope="individual" iconBg="bg-steingrau" icon={<IcCheck size={20} />} seed={PACK_SEED} />
+          <Collapsible bg="bg-sonnenorange" icon={<IcBasket size={18} />} title="Einkaufsliste" right={scopeBadge("shared")}>
+            <CheckList storageKey="tm_shopping_v2" seed={SHOP_SEED} />
+          </Collapsible>
+          <Collapsible bg="bg-tuerkis" icon={<IcUtensils size={18} />} title="Gerichte" right={scopeBadge("shared")}>
+            <CheckList storageKey="tm_meals_v2" seed={MEALS_SEED} />
+          </Collapsible>
+          <Collapsible bg="bg-tiefblau" icon={<IcCheck size={18} />} title="Boots-Checkliste" right={scopeBadge("shared")}>
+            <CheckList storageKey="tm_boatcheck_v2" seed={BOATCHECK_SEED} />
+          </Collapsible>
+          <Collapsible bg="bg-meeresblau" icon={<IcAnchor size={18} />} title="Mitbringen – Crew-Ausrüstung" right={scopeBadge("shared")}>
+            <CheckList storageKey="tm_crewgear_v2" seed={CREWGEAR_SEED} />
+          </Collapsible>
+          <Collapsible bg="bg-steingrau" icon={<IcCheck size={18} />} title="Packliste" right={scopeBadge("individual")}>
+            <CheckList storageKey="tm_packing_v3" seed={PACK_SEED} />
+          </Collapsible>
         </div>
       );
     }
