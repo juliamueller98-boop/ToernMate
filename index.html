@@ -864,7 +864,7 @@
       return (
         <div className="space-y-3">
           <Card className="p-3 overflow-hidden">
-            <iframe title="Revierkarte" src="revierkarte.html" loading="lazy" style={{ width:"100%", height:"440px", border:"0", borderRadius:"12px", display:"block" }} />
+            <iframe title="Revierkarte" src="revierkarte.html?v=2" loading="lazy" style={{ width:"100%", height:"440px", border:"0", borderRadius:"12px", display:"block" }} />
             <div className="text-[11px] text-steingrau mt-2 px-1">Karte © OpenStreetMap-Mitwirkende. Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</div>
           </Card>
 
@@ -920,17 +920,40 @@
       const [items, setItems] = useLocalStorage(props.storageKey, props.seed || []);
       const [draft, setDraft] = useState("");
       const [showDone, setShowDone] = useState(false);
+      const [cat, setCat] = useState(null);
+      const headers = items.filter(it => it.header);
+      const effectiveCat = (cat !== null) ? cat : (headers[0] ? headers[0].id : "");
       function toggle(id) { setItems(items.map(it => it.id === id ? Object.assign({}, it, { done: !it.done }) : it)); }
-      function add() { const t = draft.trim(); if (!t) return; setItems(items.concat([{ id: "u" + Date.now(), text: t, done: false, header: false }])); setDraft(""); }
+      function add() {
+        const t = draft.trim(); if (!t) return;
+        const item = { id: "u" + Date.now(), text: t, done: false, header: false };
+        if (headers.length > 0 && effectiveCat) {
+          const arr = items.slice();
+          let hi = -1;
+          for (let i = 0; i < arr.length; i++) { if (arr[i].id === effectiveCat) { hi = i; break; } }
+          if (hi < 0) { arr.push(item); }
+          else { let j = hi + 1; while (j < arr.length && !arr[j].header) j++; arr.splice(j, 0, item); }
+          setItems(arr);
+        } else {
+          setItems(items.concat([item]));
+        }
+        setDraft("");
+      }
       function remove(id) { setItems(items.filter(it => it.id !== id)); }
       const real = items.filter(it => !it.header);
       const done = real.filter(it => it.done).length;
       const visible = items.filter(it => it.header || !it.done || showDone);
+      const field = "rounded-xl bg-wolkenweiss border border-wolkenweiss px-3 py-2 text-sm text-tiefblau outline-none focus:border-tuerkis";
       return (
         <div>
           <div className="mb-4"><ProgressBar done={done} total={real.length} /></div>
+          {headers.length > 0 && (
+            <select value={effectiveCat} onChange={(e) => setCat(e.target.value)} className={"w-full mb-2 " + field}>
+              {headers.map(h => <option key={h.id} value={h.id}>{h.text}</option>)}
+            </select>
+          )}
           <div className="flex gap-2 mb-3">
-            <input value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") add(); }} placeholder="Hinzufügen …" className="flex-1 rounded-xl bg-wolkenweiss border border-wolkenweiss px-3 py-2 text-sm text-tiefblau outline-none focus:border-tuerkis" />
+            <input value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") add(); }} placeholder="Hinzufügen …" className={"flex-1 " + field} />
             <button onClick={add} className="bg-tuerkis text-white rounded-xl px-3 active:scale-95 transition"><IcPlus size={20} /></button>
           </div>
           <div className="space-y-1.5">
