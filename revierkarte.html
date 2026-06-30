@@ -13,7 +13,9 @@
     #fallback { position: fixed; inset: 0; z-index: 3; display: none; align-items: center; justify-content: center; padding: 24px; text-align: center; background: #e7f8f7; }
     #fallback div { max-width: 320px; font-size: 14px; line-height: 1.5; color: #475569; }
     #fallback a { color: #147A8B; font-weight: 600; }
-    .sail-marker { position: relative; width: 24px; height: 24px; transform: translate(-12px,-12px); border: 3px solid #fff; border-radius: 999px 999px 999px 0; box-shadow: 0 5px 12px rgba(0,49,58,0.4); rotate: -45deg; }
+    .leaflet-div-icon { background: transparent; border: 0; }
+    .sail-marker { display: block; width: 15px; height: 15px; border: 2.5px solid #fff; border-radius: 50%; box-shadow: 0 3px 7px rgba(0,49,58,0.45); }
+    .sec1 { background: #2563EB; } .sec2 { background: #14B8A6; } .sec3 { background: #F59E0B; } .sec4 { background: #DC2626; } .sec5 { background: #7C3AED; }
     .leaflet-tooltip.sail-tooltip { border: 0; border-radius: 999px; padding: 3px 9px; color: #fff; background: #147A8B; box-shadow: 0 6px 16px rgba(0,49,58,0.22); font-weight: 600; }
     .leaflet-tooltip-top.sail-tooltip::before { border-top-color: #147A8B; }
     .leaflet-popup-content-wrapper { border-radius: 14px; }
@@ -84,7 +86,7 @@
         places.forEach(function (p) {
           var ll = [p.lat, p.lng]; all.push(ll);
           var color = SECTION_COLORS[p.sec - 1];
-          var icon = L.divIcon({ className:"", html:'<span class="sail-marker" style="background:' + color + '"></span>', iconSize:[24,24], iconAnchor:[12,22], popupAnchor:[0,-18], tooltipAnchor:[0,-22] });
+          var icon = L.divIcon({ className:"", html:'<span class="sail-marker sec' + p.sec + '"></span>', iconSize:[15,15], iconAnchor:[7,7], popupAnchor:[0,-8], tooltipAnchor:[0,-9] });
           var popup = '<strong class="popup-title">' + p.name + '</strong><p class="popup-tip"><strong>Tipp:</strong> ' + p.tip + '</p><div class="popup-note">Hinweis: nicht zur Navigation verwenden.</div>';
           L.marker(ll, { icon: icon, title: p.name }).addTo(map).bindPopup(popup).bindTooltip(p.name, { direction:"top", className:"sail-tooltip", opacity:0.95 });
         });
