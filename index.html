@@ -131,116 +131,114 @@
        Revier-Wissensdatenbank; Marina-Links/VHF web-verifiziert)
        ============================================================ */
     const HARBORS = [
-      { id:"fethiye", name:"Fethiye", type:"Stadthafen / Startbasis", lat:36.623, lon:29.102, region:"Golf von Fethiye",
-        desc:"Lebhafte Hafenstadt und Ausgangspunkt. Hier wird einklariert, eingekauft und der Törn beginnt. Touristisch und betriebsam, dafür mit allem, was man vor dem Ablegen braucht.",
+      { id:"fethiye", name:"Fethiye", type:"Stadthafen / Startbasis", coord:"36°37.4'N, 29°06.1'E", lat:36.623, lon:29.102, region:"Golf von Fethiye",
+        desc:"Lebhafte Hafenstadt und Startpunkt des Törns. Hier wird einklariert (Port of Entry mit Polizei, Zoll, Hafenarzt), eingekauft und abgelegt. Touristisch und laut, dafür mit voller Versorgung.",
         depth:"3–6 m an den Stegen", underground:"Schlick / Sand", windProtection:"Marina-geschützt", anlegeart:"Längsseits oder im Päckchen an der Marina",
-        facilities:["Großsupermärkte","Yachtausrüster","Diesel","Wasser & Strom","Fischmarkt","Port of Entry"],
-        tip:"Auf dem Fischmarkt frischen Fang kaufen und in einem der umliegenden Lokale zubereiten lassen. Die lykischen Felsengräber liegen mitten in der Stadt.", vhf:null, web:null },
-      { id:"goecek", name:"Göcek", type:"Charterbasis / sechs Marinas", lat:36.750, lon:28.940, region:"Golf von Fethiye",
-        desc:"Kleiner Ort mit gleich sechs Marinas, daher fast immer ein freier Platz. Funktional und gepflegt, ideal für Crewwechsel wegen der Nähe zum Flughafen Dalaman.",
+        facilities:["ECE Marina","Yacht Classic Marina","Großsupermärkte","Yachtausrüster","Diesel","Fischmarkt","Port of Entry"], tip:"Auf dem Fischmarkt frischen Fang kaufen und in einem der umliegenden Lokale zubereiten lassen. Sehenswert: die lykischen Felsengräber und die Ruinen von Telmessos. Nach Göcek rund 8 SM.", vhf:null, web:null },
+      { id:"goecek", name:"Göcek", type:"Charterbasis / sechs Marinas", coord:"36°45.0'N, 28°56.4'E", lat:36.75, lon:28.94, region:"Golf von Fethiye",
+        desc:"Kleiner Ort mit gleich sechs Marinas (u. a. Göcek-Gemeindepier, Skopea, Club Marina), daher fast immer ein freier Platz. Funktional und gepflegt, idealer Crewwechsel-Punkt.",
         depth:"2–5 m an den Stegen", underground:"Sand / Schlick", windProtection:"Gut, geschützte Lage", anlegeart:"Heck zum Steg, Muring",
-        facilities:["Supermarkt","Yachtausrüster","Dieselsteg","Fäkalien-Pumpout","Wasser & Strom"],
-        tip:"Flughafen Dalaman nur rund 30 Minuten mit dem Taxi entfernt. Perfekt für Crewwechsel.", vhf:"73 (D-Marin)", web:"https://www.d-marin.com/de/marinas/gocek/" },
-      { id:"kapicreek", name:"Kapı Creek (Kapı Koyu)", type:"Restaurant-Fjordbucht", lat:36.600, lon:28.933, region:"Golf von Fethiye",
-        desc:"Schmaler, fjordartiger Einschnitt mit ruhigem Wasser. Allseitig geschützt und damit eine zuverlässige Adresse für eine erholsame Nacht vor Anker.",
+        facilities:["Sechs Marinas","Supermarkt","Yachtausrüster","Dieselsteg","Fäkalien-Pumpout"], tip:"Flughafen Dalaman nur 22 km bzw. rund 30 Minuten mit dem Taxi entfernt, perfekt für Crewwechsel. Nach Gemiler etwa 10 SM.", vhf:"73 (D-Marin)", web:"https://www.d-marin.com/de/marinas/gocek/" },
+      { id:"kapicreek", name:"Kapı Creek (Kapı Koyu)", type:"Restaurant-Fjordbucht", coord:"ca. 36°36'N, 28°56'E", lat:36.6, lon:28.933, region:"Golf von Fethiye",
+        desc:"Schmaler, fjordartiger Einschnitt mit ruhigem Wasser, allseitig geschützt. Zuverlässige Adresse für eine erholsame Nacht vor Anker.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Sehr gut, rundum geschützt", anlegeart:"Anker plus Landleine",
-        facilities:["Restaurant mit Steg"], tip:"Wer am Steg festmacht, isst abends im Lokal. Die tiefe Bucht bleibt selbst bei Wind angenehm still.", vhf:null, web:null },
-      { id:"karacaoeren", name:"Karacaören", type:"Restaurantbucht ★★★", lat:36.550, lon:28.883, region:"Golf von Fethiye",
-        desc:"Nur per Boot erreichbare Bucht mit familiengeführtem Lokal in dritter Generation. Täglich frischer Fisch, offenes Feuer und eine kleine Sammlung Flaggen aus aller Welt.",
+        facilities:["Restaurant mit Steg"], tip:"Wer am Steg festmacht, isst abends im Lokal. Die tiefe Bucht bleibt auch bei Wind still. Von Göcek rund 7 SM.", vhf:null, web:null },
+      { id:"karacaoeren", name:"Karacaören", type:"Restaurantbucht ★★★", coord:"ca. 36°33'N, 28°53'E", lat:36.55, lon:28.883, region:"Golf von Fethiye",
+        desc:"Nur per Boot erreichbare Bucht mit familiengeführtem Lokal. Solarstrom und eine 8 km lange Wasserleitung versorgen den Platz, ganzjährig geöffnet.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen NW", anlegeart:"Muring vorhanden",
-        facilities:["Restaurant (Frischfisch)","Solarstrom","Wasserleitung","Platz für viele Yachten"], tip:"Can's Restaurant in dritter Generation, bis zu 60 Yachten. Zur Vorspeise Brot, Salat, Tsatsiki und Tomatengemüse, danach Fisch nach Wahl. Ganzjährig geöffnet.", vhf:null, web:null },
-      { id:"sarsala", name:"Sarsala Koyu", type:"Restaurantbucht", lat:36.533, lon:28.967, region:"Golf von Fethiye",
+        facilities:["Can's Restaurant (Frischfisch)","Solarstrom","Wasserleitung","bis 60 Yachten"], tip:"Can's Restaurant in dritter Generation, täglich frischer Fisch am offenen Feuer. Vorspeisen Brot, Salat, Tsatsiki, Tomatengemüse, danach Fisch nach Wahl. Von Göcek rund 10 SM.", vhf:null, web:null },
+      { id:"cleopatra", name:"Cleopatra's Bath Bay", type:"Ankerbucht mit Antike ★★★", coord:"36°38.444'N, 28°51.294'E", lat:36.641, lon:28.855, region:"Golf von Fethiye",
+        desc:"Ankerbucht mit versunkenen antiken Badeanlagen, die sich beim Schnorcheln erkunden lassen. Tagsüber kommen Ausflugsboote, abends kehrt Ruhe ein.",
+        depth:"6–12 m, guter Sandgrund", underground:"Sand (guter Halt)", windProtection:"Gut gegen N und W, bei Süd exponiert", anlegeart:"Buganker plus Landleine an Fels oder Pinie",
+        facilities:["Kein Restaurant","Marktboote aus Göcek","Kiesstrand"], tip:"Früh kommen, tagsüber voller Ausflugsschiffe. Nicht innerhalb 100 m von Schwimmbereichen ankern, Landleine maximal 40 m (Regelung 2025).", vhf:null, web:null },
+      { id:"bauernbucht", name:"Bauernbucht (Yavansu Koyu)", type:"Stille Ankerbucht ★★★", coord:"ca. 36°30'N, 28°55'E", lat:36.5, lon:28.917, region:"Golf von Fethiye",
+        desc:"Geheimtipp im Süden des Golfs. So flach, dass die großen Gulets fernbleiben, dadurch herrlich ruhig und ohne Partyboote.",
+        depth:"2–5 m (flach!)", underground:"Sand", windProtection:"Gut", anlegeart:"Anker, eventuell Landleine",
+        facilities:["Kein Restaurant","unberührte Natur"], tip:"Eine große weiße Möwe aus aufgeschichteten Steinen am Ufer markiert die Bucht. Auf die geringe Tiefe achten.", vhf:null, web:null },
+      { id:"gemiler", name:"Gemiler Adası (St. Nicholas)", type:"Inselbucht / Kulturstätte ★★★", coord:"36°33.20'N, 29°04.00'E", lat:36.553, lon:29.067, region:"Golf von Fethiye",
+        desc:"Inselbucht mit byzantinischer Klosteranlage aus dem 5. Jahrhundert, vier Kirchen, Fresken und Gräbern. Liegt im rund 150 m breiten Kanal zwischen Insel und Festland.",
+        depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut im geschützten Kanal", anlegeart:"Anker plus Landleine an der Nordseite",
+        facilities:["Restaurantboote (Preise erfragen)","antike Ruinen","Eintritt ca. 2,50 TL"], tip:"Tagsüber Ausflugsverkehr, abends ruhig. Die Inselruinen sind ein lohnender Spaziergang. Nach Cold Water Bay nur 0,5 SM.", vhf:null, web:null },
+      { id:"coldwater", name:"Cold Water Bay (Soğuk Su)", type:"Ankerbucht mit Restaurant ★★★", coord:"36°33.80'N, 29°04.95'E", lat:36.563, lon:29.083, region:"Golf von Fethiye",
+        desc:"Benannt nach einer kalten Unterwasserquelle. Gemütliche Bucht mit Lokal, das beim Abendessen das Frühstück gratis dazugibt.",
+        depth:"5–10 m", underground:"Sand / Fels", windProtection:"Gut", anlegeart:"Anker plus Heckleine an Poller",
+        facilities:["Alis Restaurant","Dinghi-Steg","Frühstücksservice per Boot","ca. 12 Plätze"], tip:"Alis Restaurant hat die beste Aussicht. Morgens kommt das Paar mit dem Boot, macht Omeletts und bringt Brot (vorbestellen). Nur rund 12 Plätze, früh kommen. Wanderung (ca. 1 h) zum verlassenen Dorf Kayaköy.", vhf:null, web:null },
+      { id:"sarsala", name:"Sarsala Koyu", type:"Restaurantbucht", coord:"ca. 36°32'N, 28°58'E", lat:36.533, lon:28.967, region:"Golf von Fethiye",
         desc:"Ruhige Restaurantbucht mit gutem Schutz aus nördlichen Richtungen. Angenehmer, unaufgeregter Stopp.",
         depth:"5–12 m", underground:"Sand", windProtection:"Gut gegen N/NW", anlegeart:"Anker oder kostenloser Restaurantsteg",
         facilities:["Restaurant mit Steg"], tip:"Der Steg ist bei Abendessen im Lokal kostenlos.", vhf:null, web:null },
-      { id:"tersane", name:"Tersane Adası", type:"Historische Ankerbucht", lat:36.567, lon:28.950, region:"Golf von Fethiye",
+      { id:"tersane", name:"Tersane Adası", type:"Historische Ankerbucht", coord:"ca. 36°34'N, 28°57'E", lat:36.567, lon:28.95, region:"Golf von Fethiye",
         desc:"Inselbucht mit den Resten einer alten osmanischen Schiffswerft. Stimmungsvoll, im Hochsommer aber sehr voll.",
         depth:"3–10 m", underground:"Sand / Fels", windProtection:"Gut", anlegeart:"Anker plus Landleine",
-        facilities:["historische Werftruine"], tip:"Im Juli und August drängen sich hier viele Gulets, also früh ankommen.", vhf:null, web:null },
-      { id:"cleopatra", name:"Cleopatra's Bath Bay", type:"Ankerbucht mit Antike ★★★", lat:36.641, lon:28.855, region:"Golf von Fethiye",
-        desc:"Ankerbucht mit versunkenen antiken Badeanlagen, die sich beim Schnorcheln erkunden lassen. Tagsüber kommen Ausflugsboote, abends kehrt Ruhe ein.",
-        depth:"6–12 m, guter Sandgrund", underground:"Sand (guter Halt)", windProtection:"Gut gegen N und W, offen bei Süd", anlegeart:"Buganker plus Landleine an Fels oder Pinie",
-        facilities:["Kein Restaurant","Marktboote aus Göcek","Kiesstrand"], tip:"Früh ankommen. Nicht innerhalb 100 m zu Badebereichen ankern, Landleine maximal 40 m (Stand 2025).", vhf:null, web:null },
-      { id:"bauernbucht", name:"Bauernbucht (Yavansu Koyu)", type:"Stille Ankerbucht ★★★", lat:36.500, lon:28.917, region:"Golf von Fethiye",
-        desc:"Geheimtipp im Süden des Golfs. So flach, dass die großen Gulets fernbleiben, dadurch herrlich ruhig und ohne Partyboote.",
-        depth:"2–5 m (flach!)", underground:"Sand", windProtection:"Gut", anlegeart:"Anker, eventuell Landleine",
-        facilities:["Kein Restaurant","unberührte Natur"], tip:"Eine große Möwe aus aufgeschichteten Steinen am Ufer markiert die Bucht. Auf geringe Tiefe achten.", vhf:null, web:null },
-      { id:"gemiler", name:"Gemiler Adası", type:"Inselbucht / Kulturstätte ★★★", lat:36.553, lon:29.067, region:"Golf von Fethiye",
-        desc:"Inselbucht mit byzantinischer Klosteranlage aus dem 5. Jahrhundert, vier Kirchen, Fresken und alten Gräbern. Liegt im schmalen Kanal zwischen Insel und Festland.",
-        depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut im geschützten Kanal", anlegeart:"Anker plus Landleine an der Nordseite",
-        facilities:["Restaurantboote (Preise erfragen)","antike Ruinen"], tip:"Tagsüber Ausflugsverkehr, abends ruhig. Die Inselruinen sind ein lohnender Spaziergang.", vhf:null, web:null },
-      { id:"coldwater", name:"Cold Water Bay (Soğuk Su)", type:"Ankerbucht mit Restaurant ★★★", lat:36.563, lon:29.083, region:"Golf von Fethiye",
-        desc:"Benannt nach einer kalten Unterwasserquelle. Gemütliche Bucht mit Lokal, das beim Abendessen das Frühstück gratis dazugibt.",
-        depth:"5–10 m", underground:"Sand / Fels", windProtection:"Gut", anlegeart:"Anker plus Heckleine an Poller",
-        facilities:["Restaurant","Dinghi-Steg","Frühstücksservice per Boot"], tip:"Nur rund ein Dutzend Plätze, früh kommen. Wanderweg (ca. 1 h) zur verlassenen Siedlung Kayaköy.", vhf:null, web:null },
-      { id:"oeluedeniz", name:"Ölüdeniz (Blaue Lagune)", type:"Naturschutzgebiet ⚠️", lat:36.550, lon:29.117, region:"Golf von Fethiye",
-        desc:"Berühmte Lagune, für Yachten gesperrt. Ankern ist nur außerhalb erlaubt. Über dem Strand das Paragliding-Revier vom Babadağ.",
+        facilities:["historische Werftruine"], tip:"Im Juli und August drängen sich hier viele Gulets, also früh ankommen oder eine ruhigere Nachbarbucht wählen.", vhf:null, web:null },
+      { id:"oeluedeniz", name:"Ölüdeniz (Blaue Lagune)", type:"Naturschutzgebiet ⚠️", coord:"36°33'N, 29°07'E", lat:36.55, lon:29.117, region:"Göcek → Marmaris",
+        desc:"Berühmte Lagune, für Yachten gesperrt. Ankern ist nur außerhalb erlaubt. Über dem Strand das Paragliding-Revier vom Babadağ (1969 m).",
         depth:"3–8 m außen", underground:"Sand", windProtection:"Außenbereich mäßig", anlegeart:"Außerhalb der Lagune ankern, Zugang per Dinghi oder zu Fuß",
-        facilities:["Strand","Paragliding","keine Yachtversorgung"], tip:"Die Lagune selbst nicht anlaufen. Der Blick beim Gleitschirmflug vom Babadağ ist spektakulär.", vhf:null, web:null },
-      { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", type:"Ankerbucht / Naturerlebnis", lat:36.533, lon:28.733, region:"Göcek → Marmaris",
-        desc:"Dramatische Bucht mit grauer Felswand und roten Felsen voller hoher Pinien. Beliebt bei Tauchern und Kletterern, der Blick von oben ist gewaltig.",
+        facilities:["Strand","Paragliding","keine Yachtversorgung"], tip:"Die Lagune selbst nicht anlaufen. Der Gleitschirmflug vom Babadağ ist spektakulär. Von Gemiler rund 4 SM.", vhf:null, web:null },
+      { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", type:"Ankerbucht / Naturerlebnis", coord:"ca. 36°32'N, 28°44'E", lat:36.533, lon:28.733, region:"Göcek → Marmaris",
+        desc:"Dramatische Bucht mit grauer Felswand und roten Felsen voller hoher Pinien. Taucher- und Kletterparadies, der Blick von oben ist gewaltig.",
         depth:"4–8 m, schwarzer Sand", underground:"Sand", windProtection:"Gut gegen N/NW", anlegeart:"Anker",
         facilities:["Restaurant (gemischte Bewertungen)"], tip:"Vorsicht vor Unterwasserfelsen im rechten Teil der Bucht.", vhf:null, web:null },
-      { id:"ekincik", name:"Ekincik (My Marina)", type:"Marina mit Restaurant ★★★", lat:36.833, lon:28.617, region:"Göcek → Marmaris",
-        desc:"Ruhige Bucht mit gepflegtem Anleger und sehr gutem, nicht ganz günstigem Lokal mit Terrassenblick. Ausgangspunkt für den Ausflug nach Dalyan.",
-        depth:"2–5 m am Kai", underground:"Sand", windProtection:"Gut", anlegeart:"Längsseits oder Heck am 175-m-Anleger",
-        facilities:["Restaurant","Wasser & Strom","Duschen (mit Restaurantbesuch)","Crewwechsel-Transfer"], tip:"Den Dalyan-Ausflug zu Kaunos, den Felsengräbern und dem Schildkrötenstrand vor Ort bei der Kooperative buchen.", vhf:null, web:null },
-      { id:"piratebay", name:"Pirate Bay", type:"Restaurantbucht", lat:36.483, lon:28.467, region:"Göcek → Marmaris",
+      { id:"ekincik", name:"Ekincik (My Marina)", type:"Marina mit Restaurant ★★★", coord:"ca. 36°50'N, 28°37'E", lat:36.833, lon:28.617, region:"Göcek → Marmaris",
+        desc:"Ruhige Bucht mit 175-m-Anleger und sehr gutem, nicht ganz günstigem Lokal mit Terrassenblick. Ausgangspunkt für den Dalyan-Ausflug.",
+        depth:"2–5 m am Kai", underground:"Sand", windProtection:"Gut", anlegeart:"Längsseits oder Heck am Anleger (T-Ausleger)",
+        facilities:["My Marina Gourmet","Wasser & Strom","Duschen (mit Restaurantbesuch)","Crewwechsel-Transfer"], tip:"Dalyan-Ausflug bei der Ekincik-Kooperative buchen (ca. 100–130 €): Kaunos, Felsengräber, Schildkrötenstrand und der Köyceğiz-See. Von Göcek rund 22 SM.", vhf:null, web:null },
+      { id:"piratebay", name:"Pirate Bay", type:"Restaurantbucht", coord:"ca. 36°29'N, 28°28'E", lat:36.483, lon:28.467, region:"Göcek → Marmaris",
         desc:"Bekannte, rundum von Felsen geschützte Restaurantbucht. Sehr sicherer Liegeplatz.",
         depth:"5–12 m", underground:"Sand / Fels", windProtection:"Sehr gut, allseitig", anlegeart:"Anker oder Restaurantsteg",
         facilities:["Restaurant mit Steg"], tip:"Durch den guten Rundumschutz auch bei unbeständigem Wind eine verlässliche Wahl.", vhf:null, web:null },
-      { id:"marmaris", name:"Marmaris", type:"Stadthafen / Charterzentrum", lat:36.852, lon:28.275, region:"Göcek → Marmaris",
-        desc:"Großes, party-orientiertes Touristenzentrum. Die meisten Segler kommen nur zum Versorgen und Einklarieren her.",
-        depth:"bis 18 m an der Pier", underground:"Schlick / Sand", windProtection:"Marina-geschützt, Bucht gut geschützt", anlegeart:"Marina (Netsel) oder Stadtpier",
-        facilities:["Großsupermärkte","Yachtausrüster","Segelmacher","Port of Entry"], tip:"Netsel Marina über UKW erreichbar. Anlaufpunkt auch für die Rückkehr aus Griechenland.", vhf:"72 / 06 (Netsel)", web:"https://www.netselmarina.com" },
-      { id:"bozukkale", name:"Bozukkale (antikes Loryma)", type:"Naturhafen / Antike ★★★", lat:36.575, lon:28.011, region:"Hisarönü-Golf",
-        desc:"Weiter Naturhafen unter den Mauern einer antiken Festung. Hervorragender Schutz, abends Pflichttermin: Sonnenuntergang von der alten Zitadelle.",
+      { id:"bozukkale", name:"Bozukkale (antikes Loryma)", type:"Naturhafen / Antike ★★★", coord:"36°34.471'N, 28°00.671'E", lat:36.575, lon:28.011, region:"Göcek → Marmaris",
+        desc:"Weiter Naturhafen unter den Mauern der antiken Festung Loryma. Hervorragender Schutz, abends Pflichttermin: Sonnenuntergang von der Zitadelle.",
         depth:"5–15 m in der Mitte", underground:"Sand / Fels", windProtection:"Hervorragend gegen S und W; Fallböen möglich", anlegeart:"Anker plus Landleine oder Restaurantsteg",
-        facilities:["Mehrere Restaurantstege","Ruine der Festung Loryma"], tip:"Der beleuchtete Steg am Sailor's House ist eine schöne Adresse. Landleine max. 40–50 m, mind. 100 m zu Badebereichen.", vhf:null, web:null },
-      { id:"sailorsparadise", name:"Sailors Paradise", type:"Restaurantsteg", lat:36.695, lon:28.008, region:"Hisarönü-Golf",
+        facilities:["Stege: Ali Baba, Sailor's House, Loryma","Festungsruine Loryma"], tip:"Sailor's House wird empfohlen, Abendessen am beleuchteten Steg über dem Wasser (Dinner plus Mooring ca. 500–700 TL p. P., 2025). Landleine max. 40–50 m, mind. 100 m zu Badebereichen. Von Marmaris rund 15 SM.", vhf:null, web:null },
+      { id:"marmaris", name:"Marmaris", type:"Stadthafen / Charterzentrum", coord:"36°51.1'N, 28°16.5'E", lat:36.852, lon:28.275, region:"Göcek → Marmaris",
+        desc:"Großes, party-orientiertes Touristenzentrum. Die meisten Segler kommen nur zum Versorgen und Einklarieren her.",
+        depth:"bis 18 m an der Pier", underground:"Schlick / Sand", windProtection:"Marina-geschützt, Bucht gut geschützt", anlegeart:"Netsel Marina oder Stadtpier",
+        facilities:["Netsel Marina","Großsupermärkte","Yachtausrüster","Segelmacher","Port of Entry"], tip:"Netsel Marina über VHF erreichbar, Stadtpier ca. 30 € pro Nacht (36 ft, 2024). Auch Anlaufpunkt für die Rückkehr aus Griechenland. Nach Datça 35–40 SM.", vhf:"73 (Netsel)", web:"https://www.netselmarina.com" },
+      { id:"dirsek", name:"Dirsek Bükü", type:"Abgelegene Bucht mit Restaurant ★★★", coord:"36°41.098'N, 27°58.839'E", lat:36.685, lon:27.981, region:"Hisarönü-Golf",
+        desc:"Nur per Boot erreichbare, sehr ruhige Bucht mit klarem Wasser. Abends Sternenhimmel über dem Wasser und gelegentlich ein Lagerfeuer am Ufer.",
+        depth:"6–12 m, sehr klar", underground:"Sand / Kies (Anker sichtprüfen)", windProtection:"Sehr gut gegen S, O und W; Meltemi kaum spürbar", anlegeart:"Anker plus Landleine oder Muring-Steg",
+        facilities:["Restaurant mit Vorspeisenbuffet","frisches Fladenbrot am Morgen"], tip:"Hauptgericht direkt in der Küche aussuchen (Mooring plus Dinner ca. 500–750 TL p. P., 2025). Einer der ruhigsten Ankerplätze im Golf. Von Marmaris rund 18 SM.", vhf:null, web:null },
+      { id:"bencik", name:"Bencik Bay", type:"Wilde Ankerbucht ★★★", coord:"36°46.774'N, 28°02.560'E", lat:36.78, lon:28.043, region:"Hisarönü-Golf",
+        desc:"Tiefer, flussarmartiger Einschnitt, durch die Geografie vollständig vom Meltemi abgeschirmt. Kein Lokal, dafür unberührte Natur und perfekter Sternenhimmel.",
+        depth:"5–10 m", underground:"Sand mit Seegras (Sandflecken wählen)", windProtection:"Vollständig geschützt", anlegeart:"Anker, gezielt auf Sandflecken",
+        facilities:["Kein Restaurant","absolute Ruhe"], tip:"Schmale Einfahrt wie ein Flussarm. Morgens kommen mitunter Fischer mit frischem Fang ans Boot. Geheimtipp Blauwasser-Bucht nahe Bozburun bei 36°39.31'N, 28°04.03'E. Von Bozukkale rund 8 SM.", vhf:null, web:null },
+      { id:"selimiye", name:"Selimiye Koyu", type:"Naturbucht mit Dorf ★★★", coord:"ca. 36°41.2'N, 28°07.5'E", lat:36.687, lon:28.125, region:"Hisarönü-Golf",
+        desc:"Tief eingeschnittene Naturbucht mit charmantem, stylischem Ort. Keine Bettenburgen, dafür mehrere Restaurants in entspannter Lage.",
+        depth:"5–12 m", underground:"Sand / Schlick", windProtection:"Sehr gut, 2 SM tief im Land", anlegeart:"Schwimmsteg mit Muring (für ~40 Yachten), Wasser und Strom",
+        facilities:["Schwimmsteg","mehrere Restaurants","Wasser & Strom"], tip:"Schöner Mix aus authentischem Dorfleben und gehobener Küche. Von Orhaniye rund 5 SM.", vhf:null, web:null },
+      { id:"bozburun", name:"Bozburun", type:"Kleinstadthafen", coord:"ca. 36°41.4'N, 28°02.5'E", lat:36.69, lon:28.042, region:"Hisarönü-Golf",
+        desc:"Beschaulicher Hafenort mit traditionellem Guletbau und einheimischem Flair. Im viereckigen Hafenbecken wird mit dem Heck zur Pier angelegt.",
+        depth:"3–6 m", underground:"Schlick / Sand", windProtection:"Gut im Hafenbecken", anlegeart:"Heck zur Pier, Anker voraus (römisch-katholisch)",
+        facilities:["Supermärkte","Yachtzubehör","Segelmacher","Markt","viele Restaurants","Wasser & Strom"], tip:"Holzschiffswerften prägen den Ort, der Muezzin gehört zum Tag dazu. Pier ca. 30 € (36 ft, 2024). Nach Datça rund 20 SM.", vhf:null, web:null },
+      { id:"sailorsparadise", name:"Sailors Paradise", type:"Restaurantsteg", coord:"ca. 36°41.7'N, 28°00.5'E", lat:36.695, lon:28.008, region:"Hisarönü-Golf",
         desc:"Solider Restaurantsteg mit typisch türkischer Küche, guter Zwischenstopp im Golf.",
         depth:"4–8 m", underground:"Sand", windProtection:"Mäßig bis gut", anlegeart:"Muring am Steg",
         facilities:["Restaurant mit Steg"], tip:"Praktischer Halt zum Mittag oder für eine Nacht im Hisarönü-Golf.", vhf:null, web:null },
-      { id:"dirsek", name:"Dirsek Bükü", type:"Abgelegene Bucht mit Restaurant ★★★", lat:36.685, lon:27.981, region:"Hisarönü-Golf",
-        desc:"Nur per Boot erreichbare, sehr ruhige Bucht mit klarem Wasser. Abends Sternenhimmel über dem Wasser und gelegentlich ein Lagerfeuer am Ufer.",
-        depth:"6–12 m, sehr klar", underground:"Sand / Kies (Anker sichtprüfen)", windProtection:"Sehr gut gegen S, O und W; Meltemi kaum spürbar", anlegeart:"Anker plus Landleine oder Muring-Steg",
-        facilities:["Restaurant mit Vorspeisenbuffet","frisches Fladenbrot am Morgen"], tip:"Hauptgericht direkt in der Küche aussuchen. Einer der ruhigsten Ankerplätze im Golf.", vhf:null, web:null },
-      { id:"bencik", name:"Bencik Bay", type:"Wilde Ankerbucht ★★★", lat:36.780, lon:28.043, region:"Hisarönü-Golf",
-        desc:"Tiefer, flussarmartiger Einschnitt, durch die Geografie vollständig vom Meltemi abgeschirmt. Kein Lokal, dafür unberührte Natur und perfekter Sternenhimmel.",
-        depth:"5–10 m", underground:"Sand mit Seegras (Sandflecken wählen)", windProtection:"Vollständig geschützt", anlegeart:"Anker, gezielt auf Sandflecken",
-        facilities:["Kein Restaurant","absolute Ruhe"], tip:"Morgens kommen mitunter Fischer mit frischem Fang ans Boot.", vhf:null, web:null },
-      { id:"selimiye", name:"Selimiye Koyu", type:"Naturbucht mit Dorf ★★★", lat:36.687, lon:28.125, region:"Hisarönü-Golf",
-        desc:"Tief eingeschnittene Naturbucht mit charmantem, stylischem Ort. Keine Bettenburgen, dafür mehrere Restaurants in entspannter Lage.",
-        depth:"5–12 m", underground:"Sand / Schlick", windProtection:"Sehr gut, 2 SM tief im Land", anlegeart:"Schwimmsteg mit Muring, Wasser und Strom",
-        facilities:["Schwimmsteg","mehrere Restaurants","Wasser & Strom"], tip:"Schöner Mix aus authentischem Dorfleben und gehobener Küche.", vhf:null, web:null },
-      { id:"orhaniye", name:"Orhaniye (Keci Bükü)", type:"Bucht mit langer Sandbank ★★", lat:36.762, lon:28.128, region:"Hisarönü-Golf",
-        desc:"Weite Bucht, die von einer fast 500 m langen begehbaren Sandbank geteilt wird. Hier lässt sich bei Kniehöhe mitten im Wasser spazieren.",
+      { id:"orhaniye", name:"Orhaniye (Keci Bükü)", type:"Bucht mit langer Sandbank ★★", coord:"36°45.73'N, 28°07.68'E", lat:36.762, lon:28.128, region:"Hisarönü-Golf",
+        desc:"Weite Bucht, die von einer fast 500 m langen begehbaren Sandbank (Kızkumu) geteilt wird. Hier lässt sich bei Kniehöhe mitten im Wasser spazieren.",
         depth:"3–10 m", underground:"Sand", windProtection:"Gut", anlegeart:"Marina, Restaurantstege oder Anker",
-        facilities:["Marina (Pool, Restaurant, Supermarkt, Hamam)","Restaurantstege","Crewwechsel-Transfer"], tip:"Bei Restaurantbesuch an den Stegen sind Wasser und Strom oft inklusive.", vhf:null, web:null },
-      { id:"bozburun", name:"Bozburun", type:"Kleinstadthafen", lat:36.690, lon:28.042, region:"Hisarönü-Golf",
-        desc:"Beschaulicher Hafenort mit traditionellem Guletbau und einheimischem Flair. Im viereckigen Hafenbecken wird mit dem Heck zur Pier angelegt.",
-        depth:"3–6 m", underground:"Schlick / Sand", windProtection:"Gut im Hafenbecken", anlegeart:"Heck zur Pier, Anker voraus",
-        facilities:["Supermärkte","Yachtzubehör","Segelmacher","Markt","viele Restaurants"], tip:"Holzschiffswerften prägen den Ort. Wer Authentizität statt Trubel sucht, ist hier richtig.", vhf:null, web:null },
-      { id:"datca", name:"Datça", type:"Stadthafen ★★", lat:36.725, lon:27.687, region:"Datça-Halbinsel",
-        desc:"Touristischer, aber authentischer Hafenort mit allem Nötigen. Angelegt wird mit dem Heck an der hölzernen Stadtpier, daneben kann man auch in der Bucht ankern.",
-        depth:"4–6 m", underground:"Schlick", windProtection:"Bucht-geschützt", anlegeart:"Heck zur Stadtpier",
-        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona“ hat die beste Hafenaussicht, etwas teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Hinter dem Badestrand liegt ein kleiner Süßwassersee.", vhf:null, web:null },
-      { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", lat:36.667, lon:27.500, region:"Datça-Halbinsel",
+        facilities:["Marti Marina (Pool, Restaurant, Supermarkt, Hamam)","über 6 Restaurantstege","Crewwechsel-Transfer"], tip:"Cennet-Marine (früher Iskele) wird empfohlen, Pool nutzbar, Flughafentransfer. Bei Restaurantbesuch an den Stegen sind Wasser und Strom oft inklusive. Von Marmaris rund 20 SM.", vhf:null, web:null },
+      { id:"datca", name:"Datça", type:"Stadthafen ★★", coord:"36°43.5'N, 27°41.2'E", lat:36.725, lon:27.687, region:"Datça-Halbinsel",
+        desc:"Touristischer, aber authentischer Hafenort mit allem Nötigen. Angelegt wird mit dem Heck an der hölzernen Stadtpier, daneben kann man auch in der Bucht ankern. Port of Entry am Ende des Südhafens.",
+        depth:"4–6 m", underground:"Schlick", windProtection:"Bucht-geschützt", anlegeart:"Heck zur Stadtpier (römisch-katholisch)",
+        facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona“ hat die beste Hafenaussicht, rund 20 % teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Südlich der Pier ein Badestrand, dahinter ein kleiner Süßwassersee. Nach Knidos rund 25 SM.", vhf:null, web:null },
+      { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", coord:"ca. 36°40'N, 27°30'E", lat:36.667, lon:27.5, region:"Datça-Halbinsel",
         desc:"Ruhiger, einheimisch geprägter Hafen mit wenig Yachttourismus. Beschauliche, fast verträumte Atmosphäre.",
         depth:"3–4 m im Hafen", underground:"Sand / Schlick", windProtection:"Gut, Schutzhafen", anlegeart:"Muring an erneuerter Kaimauer",
-        facilities:["Mini-Supermarkt","Obst & Gemüse, Mandeln, Feigen","mehrere Restaurants","kostenlose Duschen im Lokal"], tip:"Die Einfahrt ist flach (ältere Angabe ~2,3 m, später ausgebaggert). Sehr langsam einlaufen, Tiefenmesser im Auge behalten.", vhf:null, web:null },
-      { id:"hayit", name:"Hayıt Bükü", type:"Ankerbucht mit Anleger", lat:36.583, lon:27.467, region:"Datça-Halbinsel (Süd)",
+        facilities:["Mini-Supermarkt","Obst, Gemüse, Mandeln, Feigen","mehrere Restaurants","kostenlose Duschen im Lokal"], tip:"Die Einfahrt war flach (ältere Angabe ~2,3 m, 2017 auf 4 m ausgebaggert). Trotzdem sehr langsam einlaufen und den Tiefenmesser beobachten. Von Knidos rund 6 SM.", vhf:null, web:null },
+      { id:"mersincik", name:"Mersincik", type:"Einsamer Naturankerplatz ★★★", coord:"ca. 36°41'N, 27°20'E", lat:36.683, lon:27.333, region:"Datça-Halbinsel",
+        desc:"Abgeschiedene Bucht mit langem Kiesstrand, grüner Ebene voller Zitrusbäume und schroffen Bergwänden. Kaum ein Dutzend Häuser, ansonsten reine Natur.",
+        depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen N/NW", anlegeart:"Anker, eventuell Landleine",
+        facilities:["Kein Restaurant","gelegentlich Fischer mit Frischfang"], tip:"Ideal für echte Einsamkeit, Versorgung muss man mitbringen. Nur rund 2 SM westlich von Knidos.", vhf:null, web:null },
+      { id:"hayit", name:"Hayıt Bükü", type:"Ankerbucht mit Anleger", coord:"ca. 36°35'N, 27°28'E", lat:36.583, lon:27.467, region:"Datça-Halbinsel",
         desc:"Geschützte Bucht an der Südküste der Datça-Halbinsel mit Restaurantanleger. Angenehmer Stopp auf dem Weg um die Halbinsel.",
         depth:"5–12 m", underground:"Sand", windProtection:"Gut gegen Meltemi (NW)", anlegeart:"Anker oder Restaurantanleger",
         facilities:["Restaurant mit Anleger"], tip:"Durch die Südlage gut vor dem Nordwestwind geschützt.", vhf:null, web:null },
-      { id:"mersincik", name:"Mersincik", type:"Einsamer Naturankerplatz ★★★", lat:36.683, lon:27.333, region:"Datça-Halbinsel (West)",
-        desc:"Abgeschiedene Bucht mit langem Kiesstrand, Zitrushainen und schroffen Bergwänden. Kaum ein Dutzend Häuser, ansonsten reine Natur.",
-        depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen N/NW", anlegeart:"Anker, eventuell Landleine",
-        facilities:["Kein Restaurant","gelegentlich Fischer mit Frischfang"], tip:"Ideal für echte Einsamkeit. Versorgung muss man mitbringen.", vhf:null, web:null },
-      { id:"knidos", name:"Knidos", type:"Antiker Naturhafen ★★★★", lat:36.685, lon:27.375, region:"Endpunkt / Wendepunkt",
-        desc:"Highlight des Törns: ein antiker Naturhafen an der Westspitze mit Theater direkt am Wasser, Akropolis und Leuchtturm. Einzigartiger Blick auf beide Hafenbecken.",
+      { id:"knidos", name:"Knidos", type:"Antiker Naturhafen ★★★★", coord:"36°41.1'N, 27°22.5'E", lat:36.685, lon:27.375, region:"Endpunkt / Wendepunkt",
+        desc:"Highlight des Törns: ein antiker Naturhafen an der Westspitze mit Theater direkt am Wasser, Akropolis, Odeon und Leuchtturm. Einzigartiger Blick auf beide Hafenbecken.",
         depth:"6–14 m im Südhafen", underground:"Hart und steinig (gut setzen und prüfen!)", windProtection:"Südhafen schützt bei vorherrschendem NW", anlegeart:"Heck anlegen mit Vorausanker, bei Andrang Landleine",
-        facilities:["Gemeindesteg (Gebühr)","antikes Theater, Akropolis, Odeon","kaum Versorgung"], tip:"Achtung: Nordmole komplett überspült und schwer erkennbar, Einfahrt zwischen den Molen ca. 150 m breit. Eigene Verpflegung mitbringen. Bei Meltemi das Westkap frühmorgens runden.", vhf:null, web:null }
+        facilities:["Gemeindesteg (Gebühr)","Theater, Akropolis, Odeon","Ruinen-Eintritt ca. 10 TL","kaum Versorgung"], tip:"Achtung: Die Nordmole ist komplett überspült und schwer erkennbar, die Einfahrt zwischen den Molen ist ca. 150 m breit. Restaurant Aphrodite eher schwach und teuer, eigene Verpflegung mitbringen. Bei Meltemi das Westkap frühmorgens runden.", vhf:null, web:null },
     ];
     function harborById(id) { return HARBORS.filter(h => h.id === id)[0] || null; }
 
@@ -422,17 +420,22 @@
       mk("Fernglas"), mk("Walkie-Talkies")
     ];
     const PACK_SEED = [
-      mk("Reisepass & Charterunterlagen"), mk("Funkzeugnis / Segelschein"),
-      mk("Unterwäsche"), mk("Socken"), mk("T-Shirts / Tops"), mk("Kurze Hosen / Shorts"),
-      mk("Bikini / Badehose (2x)"), mk("Etwas Schickeres für abends"), mk("Pullover / Hoodie für kühle Abende"),
-      mk("Leichte Jacke / Windbreaker"), mk("Schlafsachen"),
-      mk("Sonnencreme LSF 50"), mk("After-Sun / Aloe Vera"), mk("Kopfbedeckung / Cap"), mk("Sonnenbrille mit Band"),
+      mk("Dokumente & Geld", true),
+      mk("Reisepass & Charterunterlagen"), mk("Funkzeugnis / Segelschein"), mk("Bargeld (TRY / EUR)"), mk("Kreditkarte"),
+      mk("Kleidung", true),
+      mk("Unterwäsche"), mk("Socken"), mk("T-Shirts / Tops"), mk("Kurze Hosen / Shorts"), mk("Bikini / Badehose (2x)"),
+      mk("Etwas Schickeres für abends"), mk("Pullover / Hoodie für kühle Abende"), mk("Leichte Jacke / Windbreaker"), mk("Schlafsachen"),
+      mk("Sonnenschutz", true),
+      mk("Sonnencreme LSF 50"), mk("After-Sun / Aloe Vera"), mk("Kopfbedeckung / Cap"), mk("Sonnenbrille mit Band"), mk("Lippenpflege mit LSF"),
+      mk("Schuhe", true),
       mk("Rutschfeste Bootsschuhe"), mk("Landleinenschuhe (alte Schuhe fürs Klettern an Land)"), mk("Flip-Flops / Sandalen"),
-      mk("Reisehandtuch"), mk("Extra Handtuch zum Schwimmen"), mk("Zahnbürste & Zahnpasta"), mk("Kulturbeutel"),
-      mk("Persönliche Medikamente"), mk("Reisetabletten gegen Seekrankheit"), mk("Brille / Kontaktlinsen"),
-      mk("Mückenspray"), mk("Lippenpflege mit LSF"),
+      mk("Bad & Gesundheit", true),
+      mk("Zahnbürste & Zahnpasta"), mk("Kulturbeutel"), mk("Reisehandtuch"), mk("Extra Handtuch zum Schwimmen"),
+      mk("Persönliche Medikamente"), mk("Reisetabletten gegen Seekrankheit"), mk("Brille / Kontaktlinsen"), mk("Mückenspray"),
+      mk("Technik", true),
       mk("Handy & Ladekabel"), mk("Powerbank"), mk("Stirnlampe"),
-      mk("Wasserdichter Drybag"), mk("Schnorchel & Taucherbrille"), mk("Bargeld (TRY / EUR)")
+      mk("Wasser & Spaß", true),
+      mk("Wasserdichter Drybag"), mk("Schnorchel & Taucherbrille")
     ];
     const BOATCHECK_SEED = [
       mk("Rettungswesten geprüft"), mk("Seeventile kontrolliert"), mk("Bilgepumpe funktioniert"), mk("Motoröl & Kühlwasser geprüft"),
@@ -585,11 +588,13 @@
     }
 
     function WeatherCard() {
-      const url = "https://www.windy.com/?" + WEATHER_LAT + "," + WEATHER_LON + ",9";
+      const link = "https://www.windy.com/?" + WEATHER_LAT + "," + WEATHER_LON + ",9";
+      const embed = "https://embed.windy.com/embed2.html?lat=" + WEATHER_LAT + "&lon=" + WEATHER_LON + "&detailLat=" + WEATHER_LAT + "&detailLon=" + WEATHER_LON + "&zoom=8&level=surface&overlay=wind&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=bft&metricTemp=%C2%B0C&radarRange=-1";
       return (
         <Card className="p-5">
           <SectionHead bg="bg-meeresblau" icon={<IcWind size={20} />} title="Wind & Wetter" sub="Revier Fethiye–Datça" />
-          <a href={url} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-meeresblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition"><IcExternal size={18} /> Windy.com öffnen</a>
+          <iframe title="Windy Wind & Wetter" src={embed} width="100%" height="340" frameBorder="0" loading="lazy" style={{ borderRadius:"12px", display:"block" }} />
+          <a href={link} target="_blank" rel="noopener noreferrer" className="mt-3 w-full flex items-center justify-center gap-2 bg-meeresblau text-white font-medium rounded-xl py-2.5 active:scale-[0.98] transition"><IcExternal size={18} /> In Windy.com öffnen</a>
         </Card>
       );
     }
@@ -599,6 +604,7 @@
       const [history, setHistory] = useLocalStorage("tm_kitchen_history", []);
       const [rolling, setRolling] = useState(false);
       const [flash, setFlash] = useState(null);
+      const [creditOpen, setCreditOpen] = useState(false);
       const night = d.inTrip ? d.dayNumber : 1;
       const present = crewForNight(night);
       function counts() { const c = {}; present.forEach(n => { c[n] = 0; }); history.forEach(h => { if (c[h.name] !== undefined) c[h.name] += 1; }); return c; }
@@ -611,6 +617,7 @@
           if (ticks > 12) { clearInterval(iv); const pick = weighted[Math.floor(Math.random()*weighted.length)]; setFlash(pick); setRolling(false); setHistory(history.concat([{ name: pick, night: night, ts: Date.now() }])); }
         }, 70);
       }
+      function credit(name) { setHistory(history.concat([{ name: name, night: night, ts: Date.now() }])); setCreditOpen(false); }
       const c = counts();
       return (
         <Card className="p-5">
@@ -620,10 +627,19 @@
             <div className="text-2xl font-semibold text-tiefblau min-h-[2rem]">{flash || "—"}</div>
           </div>
           <button onClick={roll} disabled={rolling} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition disabled:opacity-60"><IcDice size={20} /> {rolling ? "Würfelt …" : "Abwasch auswürfeln"}</button>
+          <div className="text-[11px] text-steingrau text-center mt-2">Fair gewichtet: Wer seltener dran war, wird häufiger gezogen.</div>
           <div className="mt-4">
             <div className="text-xs font-semibold text-steingrau uppercase tracking-wide mb-2">Bisher dran gewesen</div>
             <div className="flex flex-wrap gap-2">{present.map(n => <span key={n} className="text-xs px-2.5 py-1 rounded-full bg-seegruen/40 text-tiefblau">{n} · {c[n]}×</span>)}</div>
-            {history.length > 0 && <button onClick={() => { if (confirm("Verlauf zurücksetzen?")) setHistory([]); }} className="mt-3 text-xs text-steingrau underline">Verlauf zurücksetzen</button>}
+            {!creditOpen && <button onClick={() => setCreditOpen(true)} className="mt-3 text-xs text-meeresblau">+ Jemand hat freiwillig gespült</button>}
+            {creditOpen && (
+              <div className="mt-3">
+                <div className="text-xs text-steingrau mb-1.5">Wer hat gespült? (zählt dazu, dann seltener dran)</div>
+                <div className="flex flex-wrap gap-2">{present.map(n => <button key={n} onClick={() => credit(n)} className="text-xs px-2.5 py-1 rounded-full bg-sonnenorange/20 text-tiefblau active:scale-95 transition">{n}</button>)}</div>
+                <button onClick={() => setCreditOpen(false)} className="mt-2 text-xs text-steingrau">abbrechen</button>
+              </div>
+            )}
+            {history.length > 0 && <button onClick={() => { if (confirm("Verlauf zurücksetzen?")) setHistory([]); }} className="mt-3 block text-xs text-steingrau underline">Verlauf zurücksetzen</button>}
           </div>
         </Card>
       );
@@ -805,6 +821,7 @@
       return (
         <div className="space-y-3 text-sm">
           <p className="text-steingrau">{h.desc}</p>
+          {h.coord && <div className="flex items-center gap-1.5 text-tiefblau"><IcMapPin size={15} /><span className="font-medium">{h.coord}</span></div>}
           <div className="grid grid-cols-2 gap-y-2 gap-x-3">
             <Fact label="Anlegen" value={h.anlegeart} /><Fact label="Tiefe" value={h.depth} />
             <Fact label="Ankergrund" value={h.underground} /><Fact label="Windschutz" value={h.windProtection} />
@@ -901,6 +918,7 @@
     function CheckList(props) {
       const [items, setItems] = useLocalStorage(props.storageKey, props.seed || []);
       const [draft, setDraft] = useState("");
+      const [showDone, setShowDone] = useState(false);
       function toggle(id) { setItems(items.map(it => it.id === id ? Object.assign({}, it, { done: !it.done }) : it)); }
       function add() { const t = draft.trim(); if (!t) return; setItems(items.concat([{ id: "u" + Date.now(), text: t, done: false, header: false }])); setDraft(""); }
       function remove(id) { setItems(items.filter(it => it.id !== id)); }
@@ -909,6 +927,7 @@
       const scopeBadge = props.scope === "shared"
         ? <span className="text-[10px] px-2 py-0.5 rounded-full bg-seegruen/50 text-meeresblau">geteilt</span>
         : <span className="text-[10px] px-2 py-0.5 rounded-full bg-sand text-tiefblau">persönlich</span>;
+      const visible = items.filter(it => it.header || !it.done || showDone);
       return (
         <Card className="p-5">
           <div className="flex items-center gap-3 mb-3">
@@ -922,7 +941,7 @@
           </div>
           <div className="space-y-1.5">
             {items.length === 0 && <div className="text-sm text-steingrau">Noch nichts auf der Liste.</div>}
-            {items.map(it => it.header ? (
+            {visible.map(it => it.header ? (
               <div key={it.id} className="flex items-center justify-between pt-3 pb-1">
                 <span className="text-xs font-semibold text-steingrau uppercase tracking-wide">{it.text}</span>
                 <button onClick={() => remove(it.id)} className="text-steingrau/40 hover:text-sonnenorange p-1"><IcTrash size={14} /></button>
@@ -935,6 +954,9 @@
               </div>
             ))}
           </div>
+          {done > 0 && (
+            <button onClick={() => setShowDone(!showDone)} className="mt-3 text-xs text-meeresblau">{showDone ? "Erledigte ausblenden" : done + " erledigte anzeigen"}</button>
+          )}
         </Card>
       );
     }

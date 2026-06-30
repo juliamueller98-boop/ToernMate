@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <title>Revierkarte Fethiye–Datça</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIINfQdspOOS4o4tODH7SuXo6z2AT3G03f4=" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
   <style>
     html, body, #map { width: 100%; height: 100%; min-height: 100dvh; margin: 0; }
     body { font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif; color: #063943; background: #e7f8f7; overflow: hidden; }
     #map { position: fixed; inset: 0; z-index: 1; }
+    #fallback { position: fixed; inset: 0; z-index: 2; display: none; align-items: center; justify-content: center; padding: 24px; text-align: center; background: #e7f8f7; }
+    #fallback div { max-width: 320px; font-size: 14px; line-height: 1.5; color: #475569; }
+    #fallback a { color: #147A8B; font-weight: 600; }
     .sail-marker { position: relative; width: 20px; height: 20px; transform: translate(-10px,-10px); border: 3px solid #fff; border-radius: 999px 999px 999px 0; background: linear-gradient(135deg,#147A8B,#2BB9B1); box-shadow: 0 6px 14px rgba(0,49,58,0.35); rotate: -45deg; }
     .sail-marker::after { content: ""; position: absolute; inset: 4px; border-radius: 999px; background: #fff; opacity: 0.86; }
     .leaflet-tooltip.sail-tooltip { border: 0; border-radius: 999px; padding: 3px 9px; color: #fff; background: #147A8B; box-shadow: 0 6px 16px rgba(0,49,58,0.22); font-weight: 600; }
@@ -26,74 +28,70 @@
 </head>
 <body>
   <main id="map" aria-label="Revierkarte Fethiye bis Datça"></main>
+  <div id="fallback"><div>Die Karte konnte nicht geladen werden. Vermutlich blockiert das Netzwerk den Karten-Server. Direkt öffnen: <a href="https://www.openstreetmap.org/#map=9/36.69/28.23" target="_blank" rel="noopener">OpenStreetMap</a></div></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    var TURQUOISE = "#2BB9B1", PETROL = "#147A8B";
+    (function () {
+      function showFallback() { var f = document.getElementById("fallback"); if (f) f.style.display = "flex"; }
+      if (!window.L) { showFallback(); return; }
 
-    var places = [
-      { id:"fethiye", name:"Fethiye", lat:36.623, lng:29.102, tip:"Startbasis, Einklarieren und Versorgen." },
-      { id:"goecek", name:"Göcek", lat:36.750, lng:28.940, tip:"Sechs Marinas, fast immer ein Platz frei. Crewwechsel-Punkt." },
-      { id:"kapicreek", name:"Kapı Creek", lat:36.600, lng:28.933, tip:"Fjordartige, rundum geschützte Restaurantbucht." },
-      { id:"karacaoeren", name:"Karacaören", lat:36.550, lng:28.883, tip:"Can's Restaurant, frischer Fisch, nur per Boot erreichbar." },
-      { id:"cleopatra", name:"Cleopatra's Bath Bay", lat:36.641, lng:28.855, tip:"Versunkene antike Bäder zum Schnorcheln. Früh kommen." },
-      { id:"gemiler", name:"Gemiler", lat:36.553, lng:29.067, tip:"Byzantinische Klosterruinen, Badepause im Kanal." },
-      { id:"coldwater", name:"Cold Water Bay", lat:36.563, lng:29.083, tip:"Lokal mit Gratis-Frühstück, nur ~12 Plätze." },
-      { id:"oeluedeniz", name:"Ölüdeniz", lat:36.550, lng:29.117, tip:"Lagune für Yachten gesperrt, außen ankern. Paragliding." },
-      { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", lat:36.533, lng:28.733, tip:"Graue Felswand, Taucher- und Kletterspot. Unterwasserfelsen rechts." },
-      { id:"ekincik", name:"Ekincik", lat:36.833, lng:28.617, tip:"My Marina, Ausgangspunkt für den Dalyan-Ausflug." },
-      { id:"piratebay", name:"Pirate Bay", lat:36.483, lng:28.467, tip:"Allseitig geschützte Restaurantbucht." },
-      { id:"marmaris", name:"Marmaris", lat:36.852, lng:28.275, tip:"Großes Charterzentrum, Versorgung, Port of Entry." },
-      { id:"bozukkale", name:"Bozukkale", lat:36.575, lng:28.011, tip:"Antike Festung Loryma, Sonnenuntergang von der Zitadelle." },
-      { id:"sailorsparadise", name:"Sailors Paradise", lat:36.695, lng:28.008, tip:"Restaurantsteg, türkische Küche." },
-      { id:"dirsek", name:"Dirsek Bükü", lat:36.685, lng:27.981, tip:"Sehr ruhig, klares Wasser, Meltemi kaum spürbar." },
-      { id:"bencik", name:"Bencik Bay", lat:36.780, lng:28.043, tip:"Tiefer Einschnitt, vollständig geschützt, kein Lokal." },
-      { id:"selimiye", name:"Selimiye Koyu", lat:36.687, lng:28.125, tip:"Stylisches Dorf, mehrere Restaurants, Schwimmsteg." },
-      { id:"bozburun", name:"Bozburun", lat:36.690, lng:28.042, tip:"Traditioneller Guletbau, einheimisches Flair." },
-      { id:"orhaniye", name:"Orhaniye", lat:36.762, lng:28.128, tip:"Begehbare Sandbank (Kızkumu), Marti Marina." },
-      { id:"datca", name:"Datça", lat:36.725, lng:27.687, tip:"Authentischer Stadthafen, Restaurant Maradona, Port of Entry." },
-      { id:"palamut", name:"Palamut Limanı", lat:36.667, lng:27.500, tip:"Ruhiger Schutzhafen. Flache Einfahrt, langsam einlaufen." },
-      { id:"hayit", name:"Hayıt Bükü", lat:36.583, lng:27.467, tip:"Geschützte Südbucht mit Restaurantanleger." },
-      { id:"mersincik", name:"Mersincik", lat:36.683, lng:27.333, tip:"Einsamer Naturankerplatz, keine Versorgung." },
-      { id:"knidos", name:"Knidos", lat:36.685, lng:27.375, tip:"Antiker Naturhafen, Highlight. Nordmole überspült, Westkap früh runden." }
-    ];
+      var TURQUOISE = "#2BB9B1", PETROL = "#147A8B";
+      var places = [
+        { id:"fethiye", name:"Fethiye", lat:36.623, lng:29.102, tip:"Startbasis, Einklarieren und Versorgen." },
+        { id:"goecek", name:"Göcek", lat:36.750, lng:28.940, tip:"Sechs Marinas, fast immer ein Platz frei. Crewwechsel-Punkt." },
+        { id:"kapicreek", name:"Kapı Creek", lat:36.600, lng:28.933, tip:"Fjordartige, rundum geschützte Restaurantbucht." },
+        { id:"karacaoeren", name:"Karacaören", lat:36.550, lng:28.883, tip:"Can's Restaurant, frischer Fisch, nur per Boot erreichbar." },
+        { id:"cleopatra", name:"Cleopatra's Bath Bay", lat:36.641, lng:28.855, tip:"Versunkene antike Bäder zum Schnorcheln. Früh kommen." },
+        { id:"gemiler", name:"Gemiler", lat:36.553, lng:29.067, tip:"Byzantinische Klosterruinen, Badepause im Kanal." },
+        { id:"coldwater", name:"Cold Water Bay", lat:36.563, lng:29.083, tip:"Lokal mit Gratis-Frühstück, nur ~12 Plätze." },
+        { id:"oeluedeniz", name:"Ölüdeniz", lat:36.550, lng:29.117, tip:"Lagune für Yachten gesperrt, außen ankern. Paragliding." },
+        { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", lat:36.533, lng:28.733, tip:"Graue Felswand, Taucher- und Kletterspot. Unterwasserfelsen rechts." },
+        { id:"ekincik", name:"Ekincik", lat:36.833, lng:28.617, tip:"My Marina, Ausgangspunkt für den Dalyan-Ausflug." },
+        { id:"piratebay", name:"Pirate Bay", lat:36.483, lng:28.467, tip:"Allseitig geschützte Restaurantbucht." },
+        { id:"marmaris", name:"Marmaris", lat:36.852, lng:28.275, tip:"Großes Charterzentrum, Versorgung, Port of Entry." },
+        { id:"bozukkale", name:"Bozukkale", lat:36.575, lng:28.011, tip:"Antike Festung Loryma, Sonnenuntergang von der Zitadelle." },
+        { id:"sailorsparadise", name:"Sailors Paradise", lat:36.695, lng:28.008, tip:"Restaurantsteg, türkische Küche." },
+        { id:"dirsek", name:"Dirsek Bükü", lat:36.685, lng:27.981, tip:"Sehr ruhig, klares Wasser, Meltemi kaum spürbar." },
+        { id:"bencik", name:"Bencik Bay", lat:36.780, lng:28.043, tip:"Tiefer Einschnitt, vollständig geschützt, kein Lokal." },
+        { id:"selimiye", name:"Selimiye Koyu", lat:36.687, lng:28.125, tip:"Stylisches Dorf, mehrere Restaurants, Schwimmsteg." },
+        { id:"bozburun", name:"Bozburun", lat:36.690, lng:28.042, tip:"Traditioneller Guletbau, einheimisches Flair." },
+        { id:"orhaniye", name:"Orhaniye", lat:36.762, lng:28.128, tip:"Begehbare Sandbank (Kızkumu), Marti Marina." },
+        { id:"datca", name:"Datça", lat:36.725, lng:27.687, tip:"Authentischer Stadthafen, Restaurant Maradona, Port of Entry." },
+        { id:"palamut", name:"Palamut Limanı", lat:36.667, lng:27.500, tip:"Ruhiger Schutzhafen. Flache Einfahrt, langsam einlaufen." },
+        { id:"hayit", name:"Hayıt Bükü", lat:36.583, lng:27.467, tip:"Geschützte Südbucht mit Restaurantanleger." },
+        { id:"mersincik", name:"Mersincik", lat:36.683, lng:27.333, tip:"Einsamer Naturankerplatz, keine Versorgung." },
+        { id:"knidos", name:"Knidos", lat:36.685, lng:27.375, tip:"Antiker Naturhafen, Highlight. Nordmole überspült, Westkap früh runden." }
+      ];
+      var routeIds = ["fethiye","cleopatra","goecek","ekincik","bozukkale","dirsek","selimiye","datca","knidos","palamut","hayit","mersincik","bencik","goecek","fethiye"];
 
-    var routeIds = ["fethiye","cleopatra","goecek","ekincik","bozukkale","dirsek","selimiye","datca","knidos","palamut","hayit","mersincik","bencik","goecek","fethiye"];
+      try {
+        var map = L.map("map", { center:[36.69, 28.23], zoom:9, zoomControl:true, attributionControl:false, preferCanvas:true });
+        L.control.attribution({ prefix:false, position:"bottomright" }).addTo(map);
+        var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap-Mitwirkende</a>'
+        });
+        var tileErrors = 0;
+        tiles.on("tileerror", function () { tileErrors++; if (tileErrors > 6) showFallback(); });
+        tiles.addTo(map);
 
-    var map = L.map("map", { center:[36.69, 28.23], zoom:9, zoomControl:true, attributionControl:false, preferCanvas:true });
-    L.control.attribution({ prefix:false, position:"bottomright" }).addTo(map);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap-Mitwirkende</a>'
-    }).addTo(map);
-
-    var icon = L.divIcon({ className:"", html:'<span class="sail-marker"></span>', iconSize:[20,20], iconAnchor:[10,18], popupAnchor:[0,-16], tooltipAnchor:[0,-18] });
-
-    var byId = {};
-    var allLatLngs = [];
-    places.forEach(function (p) {
-      byId[p.id] = p;
-      var ll = [p.lat, p.lng];
-      allLatLngs.push(ll);
-      var popup = '<strong class="popup-title">' + p.name + '</strong>' +
-                  '<p class="popup-tip"><strong>Tipp:</strong> ' + p.tip + '</p>' +
-                  '<div class="popup-note">Hinweis: nicht zur Navigation verwenden.</div>';
-      L.marker(ll, { icon: icon, title: p.name }).addTo(map)
-        .bindPopup(popup)
-        .bindTooltip(p.name, { direction:"top", className:"sail-tooltip", opacity:0.95 });
-    });
-
-    var routeLatLngs = routeIds.map(function (id) { var p = byId[id]; return p ? [p.lat, p.lng] : null; }).filter(Boolean);
-    L.polyline(routeLatLngs, { color:"#063943", weight:8, opacity:0.22, lineJoin:"round" }).addTo(map);
-    L.polyline(routeLatLngs, { color:TURQUOISE, weight:4, opacity:0.94, lineJoin:"round" }).addTo(map);
-
-    var start = byId["fethiye"];
-    L.circleMarker([start.lat, start.lng], { radius:8, color:"#fff", weight:3, fillColor:PETROL, fillOpacity:1 })
-      .addTo(map).bindTooltip("Start / Ziel: Fethiye", { direction:"top", className:"sail-tooltip", opacity:0.95 });
-
-    map.fitBounds(L.latLngBounds(allLatLngs).pad(0.08), { maxZoom:10 });
-    setTimeout(function () { try { map.invalidateSize(); } catch (e) {} }, 200);
+        var icon = L.divIcon({ className:"", html:'<span class="sail-marker"></span>', iconSize:[20,20], iconAnchor:[10,18], popupAnchor:[0,-16], tooltipAnchor:[0,-18] });
+        var byId = {}, all = [];
+        places.forEach(function (p) {
+          byId[p.id] = p; var ll = [p.lat, p.lng]; all.push(ll);
+          var popup = '<strong class="popup-title">' + p.name + '</strong><p class="popup-tip"><strong>Tipp:</strong> ' + p.tip + '</p><div class="popup-note">Hinweis: nicht zur Navigation verwenden.</div>';
+          L.marker(ll, { icon: icon, title: p.name }).addTo(map).bindPopup(popup).bindTooltip(p.name, { direction:"top", className:"sail-tooltip", opacity:0.95 });
+        });
+        var route = routeIds.map(function (id) { var p = byId[id]; return p ? [p.lat, p.lng] : null; }).filter(Boolean);
+        L.polyline(route, { color:"#063943", weight:8, opacity:0.22, lineJoin:"round" }).addTo(map);
+        L.polyline(route, { color:TURQUOISE, weight:4, opacity:0.94, lineJoin:"round" }).addTo(map);
+        var s = byId["fethiye"];
+        L.circleMarker([s.lat, s.lng], { radius:8, color:"#fff", weight:3, fillColor:PETROL, fillOpacity:1 }).addTo(map).bindTooltip("Start / Ziel: Fethiye", { direction:"top", className:"sail-tooltip", opacity:0.95 });
+        map.fitBounds(L.latLngBounds(all).pad(0.08), { maxZoom:10 });
+        setTimeout(function () { try { map.invalidateSize(); } catch (e) {} }, 200);
+      } catch (e) { showFallback(); }
+    })();
   </script>
 </body>
 </html>
