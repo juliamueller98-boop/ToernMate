@@ -35,29 +35,12 @@
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.9/babel.min.js"></script>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQdspOOS4o4tODH7SuXo6z2AT3G03f4=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
   <style>
     html, body { margin: 0; background: #F7F9FA; font-family: 'Poppins', sans-serif; }
     * { -webkit-tap-highlight-color: transparent; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-
-    /* Leaflet-Revierkarte */
-    .leaflet-container { font-family: 'Poppins', sans-serif; background: #e7f8f7; }
-    .sail-marker { position: relative; width: 20px; height: 20px; transform: translate(-10px,-10px); border: 3px solid #fff; border-radius: 999px 999px 999px 0; background: linear-gradient(135deg,#147A8B,#2BB9B1); box-shadow: 0 6px 14px rgba(0,49,58,0.35); rotate: -45deg; }
-    .sail-marker::after { content: ""; position: absolute; inset: 4px; border-radius: 999px; background: #fff; opacity: 0.86; }
-    .leaflet-tooltip.sail-tooltip { border: 0; border-radius: 999px; padding: 3px 8px; color: #fff; background: #147A8B; box-shadow: 0 6px 16px rgba(0,49,58,0.22); font-weight: 600; }
-    .leaflet-tooltip-top.sail-tooltip::before { border-top-color: #147A8B; }
-    .leaflet-popup-content-wrapper { border-radius: 14px; }
-    .leaflet-popup-content { margin: 12px 14px; font-size: 0.9rem; line-height: 1.35; color: #0D2B45; }
-    .popup-title { display: block; margin-bottom: 5px; color: #147A8B; font-size: 1rem; font-weight: 600; }
-    .popup-tip { margin: 0; }
-    .popup-note { margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(20,122,139,0.18); color: rgba(6,57,67,0.7); font-size: 0.74rem; }
-    .leaflet-control-attribution { font-size: 10px; background: rgba(255,255,255,0.9) !important; }
-    .leaflet-control-attribution a { color: #147A8B; }
   </style>
 </head>
 <body>
@@ -364,6 +347,14 @@
     const KNOT_LINKS = [
       { label:"ADAC Skipper – Die 10 wichtigsten Knoten (mit Video)", url:"https://skipper.adac.de/ratgeber/seemannsknoten-anleitung" }
     ];
+    const KNOTS = [
+      { name:"Palstek", text:"Bildet ein festes Auge, das sich nicht zuzieht. Zum Festmachen über Poller oder als Rettungsschlinge. Merksatz: Die Schlange kommt aus dem Teich, läuft um den Baum und taucht wieder in den Teich." },
+      { name:"Webleinstek (Mastwurf)", text:"Zum Befestigen an einer Stange oder Reling, z. B. für Fender. Hält gut und lässt sich schnell wieder lösen." },
+      { name:"Kreuzknoten", text:"Verbindet zwei etwa gleich starke Leinen. Wichtig: die beiden Parten müssen parallel laufen, sonst rutscht er." },
+      { name:"Achtknoten", text:"Stopperknoten am Leinenende, damit es nicht durch Block oder Öse rutscht, z. B. an der Schot." },
+      { name:"Rundtörn mit zwei halben Schlägen", text:"Sicheres Festmachen an Ring oder Pfahl, lässt sich auch unter Last binden und lösen." },
+      { name:"Klampe belegen", text:"Festmacher an der Klampe sichern: ein paar Achten legen, dann mit einem Kopfschlag bekneifen." }
+    ];
     const TR_PHRASES = [
       { tr:"Merhaba", de:"Hallo" }, { tr:"Teşekkür ederim", de:"Danke" }, { tr:"Lütfen", de:"Bitte" },
       { tr:"Evet", de:"Ja" }, { tr:"Hayır", de:"Nein" }, { tr:"Günaydın", de:"Guten Morgen" },
@@ -381,7 +372,7 @@
     /* Etappen: jede Etappe ist eine Fahrt von -> nach mit eigenen Meilen */
     const STAGES_SEED = [
       { id:"s1",  dateISO:"2026-07-11", von:"Fethiye",      nach:"Cleopatra's Bath Bay", nachId:"cleopatra",   miles:0, note:"Start & Einklarieren in Fethiye, danach kurze erste Etappe", log:"" },
-      { id:"s2",  dateISO:"2026-07-12", von:"Cleopatra",    nach:"Göcek",                nachId:"goecek",      miles:0, note:"Julia kommt dazu (Flughafen Dalaman)", log:"" },
+      { id:"s2",  dateISO:"2026-07-12", von:"Cleopatra",    nach:"Göcek",                nachId:"goecek",      miles:0, note:"Julia kommt dazu", log:"" },
       { id:"s3",  dateISO:"2026-07-13", von:"Göcek",        nach:"Ekincik",              nachId:"ekincik",     miles:0, note:"", log:"" },
       { id:"s4",  dateISO:"2026-07-14", von:"Ekincik",      nach:"Bozukkale",            nachId:"bozukkale",   miles:0, note:"", log:"" },
       { id:"s5",  dateISO:"2026-07-15", von:"Bozukkale",    nach:"Dirsek Bükü",          nachId:"dirsek",      miles:0, note:"", log:"" },
@@ -431,11 +422,17 @@
       mk("Fernglas"), mk("Walkie-Talkies")
     ];
     const PACK_SEED = [
-      mk("Reisepass & Charterunterlagen"), mk("Funkzeugnis / Segelschein"), mk("Sonnencreme LSF 50"), mk("Kopfbedeckung"),
-      mk("Sonnenbrille mit Band"), mk("Rutschfeste Bootsschuhe"), mk("Landleinenschuhe (alte Schuhe fürs Klettern an Land)"),
-      mk("Badesachen"), mk("Leichte Jacke / Windbreaker"), mk("Reisehandtuch"), mk("Extra Handtuch zum Schwimmen"),
-      mk("Kulturbeutel"), mk("Reiseapotheke & Reisetabletten"), mk("Powerbank & Ladekabel"), mk("Stirnlampe"),
-      mk("Wasserdichter Drybag"), mk("Schnorchel & Taucherbrille"), mk("Bargeld (TRY / EUR)"), mk("Mehrfachsteckdose")
+      mk("Reisepass & Charterunterlagen"), mk("Funkzeugnis / Segelschein"),
+      mk("Unterwäsche"), mk("Socken"), mk("T-Shirts / Tops"), mk("Kurze Hosen / Shorts"),
+      mk("Bikini / Badehose (2x)"), mk("Etwas Schickeres für abends"), mk("Pullover / Hoodie für kühle Abende"),
+      mk("Leichte Jacke / Windbreaker"), mk("Schlafsachen"),
+      mk("Sonnencreme LSF 50"), mk("After-Sun / Aloe Vera"), mk("Kopfbedeckung / Cap"), mk("Sonnenbrille mit Band"),
+      mk("Rutschfeste Bootsschuhe"), mk("Landleinenschuhe (alte Schuhe fürs Klettern an Land)"), mk("Flip-Flops / Sandalen"),
+      mk("Reisehandtuch"), mk("Extra Handtuch zum Schwimmen"), mk("Zahnbürste & Zahnpasta"), mk("Kulturbeutel"),
+      mk("Persönliche Medikamente"), mk("Reisetabletten gegen Seekrankheit"), mk("Brille / Kontaktlinsen"),
+      mk("Mückenspray"), mk("Lippenpflege mit LSF"),
+      mk("Handy & Ladekabel"), mk("Powerbank"), mk("Stirnlampe"),
+      mk("Wasserdichter Drybag"), mk("Schnorchel & Taucherbrille"), mk("Bargeld (TRY / EUR)")
     ];
     const BOATCHECK_SEED = [
       mk("Rettungswesten geprüft"), mk("Seeventile kontrolliert"), mk("Bilgepumpe funktioniert"), mk("Motoröl & Kühlwasser geprüft"),
@@ -566,7 +563,7 @@
 
     function TodayStage(props) {
       const d = useDay();
-      const [stages] = useLocalStorage("tm_stages_v2", STAGES_SEED);
+      const [stages] = useLocalStorage("tm_stages_v3", STAGES_SEED);
       const stage = (d.index >= 0 && d.index < stages.length) ? stages[d.index] : null;
       return (
         <Card className="p-5">
@@ -666,10 +663,10 @@
             <div className="text-white text-lg font-medium min-h-[6rem] flex items-center justify-center">{q}</div>
             <div className="text-[11px] text-white/70 mt-2">Frage {pos + 1} von {len}</div>
           </div>
-          <div className="flex gap-2 mt-3">
-            <button onClick={prev} className="w-12 flex items-center justify-center bg-wolkenweiss text-tiefblau rounded-xl py-3 active:scale-95 transition"><IcChevLeft size={18} /></button>
-            <button onClick={next} className="flex-1 flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition">Nächste <IcChevRight size={18} /></button>
-            <button onClick={reshuffle} className="w-12 flex items-center justify-center bg-sand text-tiefblau rounded-xl py-3 active:scale-95 transition"><IcShuffle size={18} /></button>
+          <div className="flex items-center justify-center gap-6 mt-3 text-steingrau">
+            <button onClick={prev} className="p-1.5 active:scale-90 transition" aria-label="Zurück"><IcChevLeft size={20} /></button>
+            <button onClick={next} className="text-sm font-medium text-meeresblau active:scale-95 transition">Nächste Frage</button>
+            <button onClick={reshuffle} className="p-1.5 active:scale-90 transition" aria-label="Mischen"><IcShuffle size={18} /></button>
           </div>
         </Card>
       );
@@ -685,11 +682,6 @@
           <KitchenDuty />
           <SpotifyCard />
           <CompassCard />
-          <div className="flex items-center justify-center gap-3 pt-2 pb-1">
-            <span className="h-px w-8 bg-steingrau/25" />
-            <span className="text-sm font-medium tracking-wide text-meeresblau">{APP_TAGLINE}</span>
-            <span className="h-px w-8 bg-steingrau/25" />
-          </div>
         </div>
       );
     }
@@ -781,7 +773,7 @@
     }
     function TabEtappen() {
       const d = useDay();
-      const [stages, setStages] = useLocalStorage("tm_stages_v2", STAGES_SEED);
+      const [stages, setStages] = useLocalStorage("tm_stages_v3", STAGES_SEED);
       function saveAt(i, ns) { setStages(stages.map((s, k) => k === i ? ns : s)); }
       function del(i) { setStages(stages.filter((s, k) => k !== i)); }
       function move(i, dir) { const j = i + dir; if (j < 0 || j >= stages.length) return; const a = stages.slice(); const t = a[i]; a[i] = a[j]; a[j] = t; setStages(a); }
@@ -793,17 +785,12 @@
       const totalMiles = stages.reduce((a, s) => a + (Number(s.miles) || 0), 0);
       return (
         <div className="space-y-3">
-          <Card className="p-4 bg-meeresblau text-white">
-            <div className="font-semibold">Etappen · {stages.length} Tage</div>
-            <div className="text-xs text-white/70 mt-1">Jede Etappe ist eine Fahrt „von → nach". Meilen selbst eintragen. Aufklappen für Logbuch und Bearbeiten, Reihenfolge mit den Pfeilen ändern.</div>
-          </Card>
           {stages.map((s, i) => <StageCard key={s.id} stage={s} num={i + 1} isToday={d.index === i} first={i === 0} last={i === stages.length - 1} onSave={(ns) => saveAt(i, ns)} onDelete={() => del(i)} onUp={() => move(i, -1)} onDown={() => move(i, 1)} />)}
           <Card className="p-4 flex items-center justify-between">
             <span className="text-sm text-steingrau">Gesamt</span>
             <span className="font-semibold text-tiefblau">{totalMiles} SM</span>
           </Card>
           <button onClick={add} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition"><IcPlus size={20} /> Etappe hinzufügen</button>
-          <button onClick={() => { if (confirm("Etappen auf die Standard-Planung zurücksetzen? Eigene Einträge gehen verloren.")) setStages(STAGES_SEED); }} className="w-full text-xs text-steingrau underline py-1">Auf Standard-Planung zurücksetzen</button>
         </div>
       );
     }
@@ -811,56 +798,6 @@
     /* ============================================================
        TAB: SEGELGUIDE
        ============================================================ */
-    function RevierMap(props) {
-      const ref = useRef(null);
-      const mapRef = useRef(null);
-      const [failed, setFailed] = useState(false);
-      useEffect(() => {
-        let cancelled = false, tries = 0;
-        function init() {
-          if (cancelled) return;
-          if (!window.L) { tries++; if (tries > 50) { setFailed(true); return; } setTimeout(init, 120); return; }
-          if (mapRef.current || !ref.current) return;
-          const L = window.L;
-          const map = L.map(ref.current, { center:[36.69,28.23], zoom:9, zoomControl:true, attributionControl:false, preferCanvas:true });
-          mapRef.current = map;
-          L.control.attribution({ prefix:false, position:"bottomright" }).addTo(map);
-          L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap-Mitwirkende</a>' }).addTo(map);
-          const icon = L.divIcon({ className:"", html:'<span class="sail-marker"></span>', iconSize:[20,20], iconAnchor:[10,18], popupAnchor:[0,-16], tooltipAnchor:[0,-18] });
-          const pts = [];
-          HARBORS.forEach(h => {
-            const ll = [h.lat, h.lon]; pts.push(ll);
-            const m = L.marker(ll, { icon: icon, title: h.name }).addTo(map);
-            m.bindPopup('<strong class="popup-title">' + h.name + '</strong><p class="popup-tip"><strong>Tipp:</strong> ' + h.tip + '</p><div class="popup-note">Hinweis: nicht zur Navigation verwenden.</div>');
-            m.bindTooltip(h.name, { direction:"top", className:"sail-tooltip", opacity:0.95 });
-            m.on("click", () => { if (props.onSelect) props.onSelect(h.name); });
-          });
-          const routeLL = STAGES_SEED.map(s => harborById(s.nachId)).filter(Boolean).map(h => [h.lat, h.lon]);
-          L.polyline(routeLL, { color:"#063943", weight:8, opacity:0.22, lineJoin:"round" }).addTo(map);
-          const route = L.polyline(routeLL, { color:"#2BB9B1", weight:4, opacity:0.94, lineJoin:"round" }).addTo(map);
-          const start = harborById("fethiye");
-          L.circleMarker([start.lat, start.lon], { radius:8, color:"#fff", weight:3, fillColor:"#147A8B", fillOpacity:1 }).addTo(map).bindTooltip("Start / Ziel: Fethiye", { direction:"top", className:"sail-tooltip", opacity:0.95 });
-          map.fitBounds(L.latLngBounds(pts).pad(0.12), { maxZoom:10 });
-          map._routeBounds = route.getBounds().pad(0.12);
-          setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 250);
-        }
-        init();
-        return () => { cancelled = true; if (mapRef.current) { try { mapRef.current.remove(); } catch (e) {} mapRef.current = null; } };
-      }, []);
-      function fitRoute() { const m = mapRef.current; if (m && m._routeBounds) m.fitBounds(m._routeBounds, { maxZoom:10 }); }
-      if (failed) {
-        return <div className="bg-wolkenweiss rounded-xl p-4 text-sm text-steingrau">Die interaktive Karte konnte nicht geladen werden (Leaflet/OpenStreetMap nicht erreichbar). Bitte Internetverbindung prüfen und neu laden.</div>;
-      }
-      return (
-        <div>
-          <div ref={ref} style={{ height: 380, width:"100%", borderRadius:"12px", overflow:"hidden" }} />
-          <div className="flex items-center justify-between gap-2 mt-2">
-            <button onClick={fitRoute} className="flex items-center gap-1.5 text-xs font-medium text-meeresblau"><IcRoute size={15} /> Route anzeigen</button>
-            <span className="text-[10px] text-steingrau">Karte © OpenStreetMap-Mitwirkende</span>
-          </div>
-        </div>
-      );
-    }
     function HarborDetail(props) {
       const h = props.harbor; if (!h) return null;
       const windy = "https://www.windy.com/?" + h.lat + "," + h.lon + ",10";
@@ -908,14 +845,9 @@
       function selectFromMap(name) { setSelected(name); setQuery(name); }
       return (
         <div className="space-y-3">
-          <Card className="p-4 bg-tiefblau text-white">
-            <div className="font-semibold">Segelguide · Fethiye – Datça</div>
-            <div className="text-xs text-white/70 mt-1">{GUIDE_OVERVIEW.route}</div>
-          </Card>
-
-          <Card className="p-3">
-            <RevierMap onSelect={selectFromMap} />
-            <div className="text-[11px] text-steingrau mt-2 px-1">Tippe einen Punkt an, um die Bucht unten zu finden. Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</div>
+          <Card className="p-3 overflow-hidden">
+            <iframe title="Revierkarte" src="revierkarte.html" loading="lazy" style={{ width:"100%", height:"440px", border:"0", borderRadius:"12px", display:"block" }} />
+            <div className="text-[11px] text-steingrau mt-2 px-1">Karte © OpenStreetMap-Mitwirkende. Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</div>
           </Card>
 
           <div className="flex items-center gap-2 bg-white rounded-xl px-3 shadow-sm">
@@ -1012,11 +944,11 @@
           <div className="text-xs text-steingrau bg-white rounded-xl p-3">
             <span className="font-semibold text-tiefblau">Geteilt vs. persönlich:</span> Geteilte Listen (Einkauf, Gerichte, Boots-Check, Crew-Ausrüstung) gelten für die ganze Crew, die persönliche Packliste nur für dich.
           </div>
-          <CheckList storageKey="tm_shopping" title="Einkaufsliste" scope="shared" iconBg="bg-sonnenorange" icon={<IcBasket size={20} />} seed={SHOP_SEED} />
-          <CheckList storageKey="tm_meals" title="Gerichte" scope="shared" iconBg="bg-tuerkis" icon={<IcUtensils size={20} />} seed={MEALS_SEED} />
-          <CheckList storageKey="tm_boatcheck" title="Boots-Checkliste" scope="shared" iconBg="bg-tiefblau" icon={<IcCheck size={20} />} seed={BOATCHECK_SEED} />
-          <CheckList storageKey="tm_crewgear" title="Mitbringen – Crew-Ausrüstung" scope="shared" iconBg="bg-meeresblau" icon={<IcAnchor size={20} />} seed={CREWGEAR_SEED} />
-          <CheckList storageKey="tm_packing" title="Packliste" scope="individual" iconBg="bg-steingrau" icon={<IcCheck size={20} />} seed={PACK_SEED} />
+          <CheckList storageKey="tm_shopping_v2" title="Einkaufsliste" scope="shared" iconBg="bg-sonnenorange" icon={<IcBasket size={20} />} seed={SHOP_SEED} />
+          <CheckList storageKey="tm_meals_v2" title="Gerichte" scope="shared" iconBg="bg-tuerkis" icon={<IcUtensils size={20} />} seed={MEALS_SEED} />
+          <CheckList storageKey="tm_boatcheck_v2" title="Boots-Checkliste" scope="shared" iconBg="bg-tiefblau" icon={<IcCheck size={20} />} seed={BOATCHECK_SEED} />
+          <CheckList storageKey="tm_crewgear_v2" title="Mitbringen – Crew-Ausrüstung" scope="shared" iconBg="bg-meeresblau" icon={<IcAnchor size={20} />} seed={CREWGEAR_SEED} />
+          <CheckList storageKey="tm_packing_v2" title="Packliste" scope="individual" iconBg="bg-steingrau" icon={<IcCheck size={20} />} seed={PACK_SEED} />
         </div>
       );
     }
@@ -1072,7 +1004,8 @@
             <Converter />
           </Collapsible>
           <Collapsible bg="bg-meeresblau" icon={<IcExternal size={20} />} title="Knoten lernen">
-            <div className="text-sm text-steingrau mb-2">Die wichtigsten an Bord: Palstek, Webleinstek (Mastwurf), Kreuzknoten, Achtknoten, Rundtörn mit zwei halben Schlägen und Klampe belegen. Beim ADAC gibt es alle mit Schritt-für-Schritt-Video:</div>
+            <div className="space-y-3 mb-3">{KNOTS.map((k, i) => <div key={i}><div className="font-medium text-tiefblau text-sm">{k.name}</div><div className="text-sm text-steingrau">{k.text}</div></div>)}</div>
+            <div className="text-sm text-steingrau mb-2">Schritt-für-Schritt mit Video:</div>
             <div className="space-y-2">{KNOT_LINKS.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-meeresblau"><IcExternal size={16} /> {l.label}</a>)}</div>
           </Collapsible>
           <Collapsible bg="bg-tuerkis" icon={<IcVolume size={20} />} title="Türkisch für an Bord">
