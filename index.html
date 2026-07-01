@@ -132,18 +132,18 @@
        ============================================================ */
     const HARBORS = [
       { id:"fethiye", name:"Fethiye", type:"Stadthafen / Startbasis", coord:"36°37.4'N, 29°06.1'E", lat:36.623, lon:29.102, region:"Golf von Fethiye",
-        desc:"Lebhafte Hafenstadt und Startpunkt des Törns. Hier wird einklariert (Port of Entry mit Polizei, Zoll, Hafenarzt), eingekauft und abgelegt. Touristisch und laut, dafür mit voller Versorgung.",
+        desc:"Lebhafte Hafenstadt und Startpunkt des Törns. Hier wird das Boot übernommen, eingekauft und abgelegt. Touristisch und laut, dafür mit voller Versorgung. Offizieller Port of Entry, das Ein- und Ausklarieren mit Polizei, Zoll und Hafenarzt betrifft aber nur die Ein- oder Ausreise aus dem Ausland, nicht diesen Rundtörn.",
         depth:"3–6 m an den Stegen", underground:"Schlick / Sand", windProtection:"Marina-geschützt", anlegeart:"Längsseits oder im Päckchen an der Marina",
         facilities:["ECE Marina","Yacht Classic Marina","Großsupermärkte","Yachtausrüster","Diesel","Fischmarkt","Port of Entry"], tip:"Auf dem Fischmarkt frischen Fang kaufen und in einem der umliegenden Lokale zubereiten lassen. Sehenswert: die lykischen Felsengräber und die Ruinen von Telmessos. Nach Göcek rund 8 SM.", vhf:null, web:null },
       { id:"goecek", name:"Göcek", type:"Charterbasis / sechs Marinas", coord:"36°45.0'N, 28°56.4'E", lat:36.75, lon:28.94, region:"Golf von Fethiye",
         desc:"Kleiner Ort mit gleich sechs Marinas (u. a. Göcek-Gemeindepier, Skopea, Club Marina), daher fast immer ein freier Platz. Funktional und gepflegt, idealer Crewwechsel-Punkt.",
         depth:"2–5 m an den Stegen", underground:"Sand / Schlick", windProtection:"Gut, geschützte Lage", anlegeart:"Heck zum Steg, Muring",
         facilities:["Sechs Marinas","Supermarkt","Yachtausrüster","Dieselsteg","Fäkalien-Pumpout"], tip:"Flughafen Dalaman nur 22 km bzw. rund 30 Minuten mit dem Taxi entfernt, perfekt für Crewwechsel. Nach Gemiler etwa 10 SM.", vhf:"73 (D-Marin)", web:"https://www.d-marin.com/de/marinas/gocek/" },
-      { id:"kapicreek", name:"Kapı Creek (Kapı Koyu)", type:"Restaurant-Fjordbucht", coord:"ca. 36°36'N, 28°56'E", lat:36.6, lon:28.933, region:"Golf von Fethiye",
+      { id:"kapicreek", name:"Kapı Creek (Kapı Koyu)", type:"Restaurant-Fjordbucht", coord:"ca. 36°37.2'N, 28°54.0'E", lat:36.62, lon:28.9, region:"Golf von Fethiye",
         desc:"Schmaler, fjordartiger Einschnitt mit ruhigem Wasser, allseitig geschützt. Zuverlässige Adresse für eine erholsame Nacht vor Anker.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Sehr gut, rundum geschützt", anlegeart:"Anker plus Landleine",
         facilities:["Restaurant mit Steg"], tip:"Wer am Steg festmacht, isst abends im Lokal. Die tiefe Bucht bleibt auch bei Wind still. Von Göcek rund 7 SM.", vhf:null, web:null },
-      { id:"karacaoeren", name:"Karacaören", type:"Restaurantbucht ★★★", coord:"ca. 36°33'N, 28°53'E", lat:36.55, lon:28.883, region:"Golf von Fethiye",
+      { id:"karacaoeren", name:"Karacaören", type:"Restaurantbucht ★★★", coord:"ca. 36°32.9'N, 29°01.8'E", lat:36.548, lon:29.03, region:"Golf von Fethiye",
         desc:"Nur per Boot erreichbare Bucht mit familiengeführtem Lokal. Solarstrom und eine 8 km lange Wasserleitung versorgen den Platz, ganzjährig geöffnet.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen NW", anlegeart:"Muring vorhanden",
         facilities:["Can's Restaurant (Frischfisch)","Solarstrom","Wasserleitung","bis 60 Yachten"], tip:"Can's Restaurant in dritter Generation, täglich frischer Fisch am offenen Feuer. Vorspeisen Brot, Salat, Tsatsiki, Tomatengemüse, danach Fisch nach Wahl. Von Göcek rund 10 SM.", vhf:null, web:null },
@@ -163,11 +163,11 @@
         desc:"Benannt nach einer kalten Unterwasserquelle. Gemütliche Bucht mit Lokal, das beim Abendessen das Frühstück gratis dazugibt.",
         depth:"5–10 m", underground:"Sand / Fels", windProtection:"Gut", anlegeart:"Anker plus Heckleine an Poller",
         facilities:["Alis Restaurant","Dinghi-Steg","Frühstücksservice per Boot","ca. 12 Plätze"], tip:"Alis Restaurant hat die beste Aussicht. Morgens kommt das Paar mit dem Boot, macht Omeletts und bringt Brot (vorbestellen). Nur rund 12 Plätze, früh kommen. Wanderung (ca. 1 h) zum verlassenen Dorf Kayaköy.", vhf:null, web:null },
-      { id:"sarsala", name:"Sarsala Koyu", type:"Restaurantbucht", coord:"ca. 36°32'N, 28°58'E", lat:36.533, lon:28.967, region:"Golf von Fethiye",
+      { id:"sarsala", name:"Sarsala Koyu", type:"Restaurantbucht", coord:"ca. 36°40.5'N, 28°54.3'E", lat:36.675, lon:28.905, region:"Golf von Fethiye",
         desc:"Ruhige Restaurantbucht mit gutem Schutz aus nördlichen Richtungen. Angenehmer, unaufgeregter Stopp.",
         depth:"5–12 m", underground:"Sand", windProtection:"Gut gegen N/NW", anlegeart:"Anker oder kostenloser Restaurantsteg",
         facilities:["Restaurant mit Steg"], tip:"Der Steg ist bei Abendessen im Lokal kostenlos.", vhf:null, web:null },
-      { id:"tersane", name:"Tersane Adası", type:"Historische Ankerbucht", coord:"ca. 36°34'N, 28°57'E", lat:36.567, lon:28.95, region:"Golf von Fethiye",
+      { id:"tersane", name:"Tersane Adası", type:"Historische Ankerbucht", coord:"ca. 36°39.6'N, 28°54.0'E", lat:36.66, lon:28.9, region:"Golf von Fethiye",
         desc:"Inselbucht mit den Resten einer alten osmanischen Schiffswerft. Stimmungsvoll, im Hochsommer aber sehr voll.",
         depth:"3–10 m", underground:"Sand / Fels", windProtection:"Gut", anlegeart:"Anker plus Landleine",
         facilities:["historische Werftruine"], tip:"Im Juli und August drängen sich hier viele Gulets, also früh ankommen oder eine ruhigere Nachbarbucht wählen.", vhf:null, web:null },
@@ -175,15 +175,15 @@
         desc:"Berühmte Lagune, für Yachten gesperrt. Ankern ist nur außerhalb erlaubt. Über dem Strand das Paragliding-Revier vom Babadağ (1969 m).",
         depth:"3–8 m außen", underground:"Sand", windProtection:"Außenbereich mäßig", anlegeart:"Außerhalb der Lagune ankern, Zugang per Dinghi oder zu Fuß",
         facilities:["Strand","Paragliding","keine Yachtversorgung"], tip:"Die Lagune selbst nicht anlaufen. Der Gleitschirmflug vom Babadağ ist spektakulär. Von Gemiler rund 4 SM.", vhf:null, web:null },
-      { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", type:"Ankerbucht / Naturerlebnis", coord:"ca. 36°32'N, 28°44'E", lat:36.533, lon:28.733, region:"Göcek → Marmaris",
+      { id:"asikoyu", name:"Asi Koyu (Graue Bucht)", type:"Ankerbucht / Naturerlebnis", coord:"Lage unbestätigt", lat:36.533, lon:28.733, region:"Göcek → Marmaris",
         desc:"Dramatische Bucht mit grauer Felswand und roten Felsen voller hoher Pinien. Taucher- und Kletterparadies, der Blick von oben ist gewaltig.",
         depth:"4–8 m, schwarzer Sand", underground:"Sand", windProtection:"Gut gegen N/NW", anlegeart:"Anker",
         facilities:["Restaurant (gemischte Bewertungen)"], tip:"Vorsicht vor Unterwasserfelsen im rechten Teil der Bucht.", vhf:null, web:null },
-      { id:"ekincik", name:"Ekincik (My Marina)", type:"Marina mit Restaurant ★★★", coord:"ca. 36°50'N, 28°37'E", lat:36.833, lon:28.617, region:"Göcek → Marmaris",
+      { id:"ekincik", name:"Ekincik (My Marina)", type:"Marina mit Restaurant ★★★", coord:"36°49.7'N, 28°32.9'E", lat:36.8285, lon:28.5488, region:"Göcek → Marmaris",
         desc:"Ruhige Bucht mit 175-m-Anleger und sehr gutem, nicht ganz günstigem Lokal mit Terrassenblick. Ausgangspunkt für den Dalyan-Ausflug.",
         depth:"2–5 m am Kai", underground:"Sand", windProtection:"Gut", anlegeart:"Längsseits oder Heck am Anleger (T-Ausleger)",
         facilities:["My Marina Gourmet","Wasser & Strom","Duschen (mit Restaurantbesuch)","Crewwechsel-Transfer"], tip:"Dalyan-Ausflug bei der Ekincik-Kooperative buchen (ca. 100–130 €): Kaunos, Felsengräber, Schildkrötenstrand und der Köyceğiz-See. Von Göcek rund 22 SM.", vhf:null, web:null },
-      { id:"piratebay", name:"Pirate Bay", type:"Restaurantbucht", coord:"ca. 36°29'N, 28°28'E", lat:36.483, lon:28.467, region:"Göcek → Marmaris",
+      { id:"piratebay", name:"Pirate Bay", type:"Restaurantbucht", coord:"Lage unbestätigt", lat:36.483, lon:28.467, region:"Göcek → Marmaris",
         desc:"Bekannte, rundum von Felsen geschützte Restaurantbucht. Sehr sicherer Liegeplatz.",
         depth:"5–12 m", underground:"Sand / Fels", windProtection:"Sehr gut, allseitig", anlegeart:"Anker oder Restaurantsteg",
         facilities:["Restaurant mit Steg"], tip:"Durch den guten Rundumschutz auch bei unbeständigem Wind eine verlässliche Wahl.", vhf:null, web:null },
@@ -203,15 +203,15 @@
         desc:"Tiefer, flussarmartiger Einschnitt, durch die Geografie vollständig vom Meltemi abgeschirmt. Kein Lokal, dafür unberührte Natur und perfekter Sternenhimmel.",
         depth:"5–10 m", underground:"Sand mit Seegras (Sandflecken wählen)", windProtection:"Vollständig geschützt", anlegeart:"Anker, gezielt auf Sandflecken",
         facilities:["Kein Restaurant","absolute Ruhe"], tip:"Schmale Einfahrt wie ein Flussarm. Morgens kommen mitunter Fischer mit frischem Fang ans Boot. Geheimtipp Blauwasser-Bucht nahe Bozburun bei 36°39.31'N, 28°04.03'E. Von Bozukkale rund 8 SM.", vhf:null, web:null },
-      { id:"selimiye", name:"Selimiye Koyu", type:"Naturbucht mit Dorf ★★★", coord:"ca. 36°41.2'N, 28°07.5'E", lat:36.687, lon:28.125, region:"Hisarönü-Golf",
+      { id:"selimiye", name:"Selimiye Koyu", type:"Naturbucht mit Dorf ★★★", coord:"ca. 36°42.0'N, 28°06.0'E", lat:36.7, lon:28.1, region:"Hisarönü-Golf",
         desc:"Tief eingeschnittene Naturbucht mit charmantem, stylischem Ort. Keine Bettenburgen, dafür mehrere Restaurants in entspannter Lage.",
         depth:"5–12 m", underground:"Sand / Schlick", windProtection:"Sehr gut, 2 SM tief im Land", anlegeart:"Schwimmsteg mit Muring (für ~40 Yachten), Wasser und Strom",
         facilities:["Schwimmsteg","mehrere Restaurants","Wasser & Strom"], tip:"Schöner Mix aus authentischem Dorfleben und gehobener Küche. Von Orhaniye rund 5 SM.", vhf:null, web:null },
-      { id:"bozburun", name:"Bozburun", type:"Kleinstadthafen", coord:"ca. 36°41.4'N, 28°02.5'E", lat:36.69, lon:28.042, region:"Hisarönü-Golf",
+      { id:"bozburun", name:"Bozburun", type:"Kleinstadthafen", coord:"36°41.2'N, 28°02.7'E", lat:36.686, lon:28.045, region:"Hisarönü-Golf",
         desc:"Beschaulicher Hafenort mit traditionellem Guletbau und einheimischem Flair. Im viereckigen Hafenbecken wird mit dem Heck zur Pier angelegt.",
         depth:"3–6 m", underground:"Schlick / Sand", windProtection:"Gut im Hafenbecken", anlegeart:"Heck zur Pier, Anker voraus (römisch-katholisch)",
         facilities:["Supermärkte","Yachtzubehör","Segelmacher","Markt","viele Restaurants","Wasser & Strom"], tip:"Holzschiffswerften prägen den Ort, der Muezzin gehört zum Tag dazu. Pier ca. 30 € (36 ft, 2024). Nach Datça rund 20 SM.", vhf:null, web:null },
-      { id:"sailorsparadise", name:"Sailors Paradise", type:"Restaurantsteg", coord:"ca. 36°41.7'N, 28°00.5'E", lat:36.695, lon:28.008, region:"Hisarönü-Golf",
+      { id:"sailorsparadise", name:"Sailors Paradise", type:"Restaurantsteg", coord:"ca. 36°43.2'N, 28°00.3'E", lat:36.72, lon:28.005, region:"Hisarönü-Golf",
         desc:"Solider Restaurantsteg mit typisch türkischer Küche, guter Zwischenstopp im Golf.",
         depth:"4–8 m", underground:"Sand", windProtection:"Mäßig bis gut", anlegeart:"Muring am Steg",
         facilities:["Restaurant mit Steg"], tip:"Praktischer Halt zum Mittag oder für eine Nacht im Hisarönü-Golf.", vhf:null, web:null },
@@ -219,23 +219,23 @@
         desc:"Weite Bucht, die von einer fast 500 m langen begehbaren Sandbank (Kızkumu) geteilt wird. Hier lässt sich bei Kniehöhe mitten im Wasser spazieren.",
         depth:"3–10 m", underground:"Sand", windProtection:"Gut", anlegeart:"Marina, Restaurantstege oder Anker",
         facilities:["Marti Marina (Pool, Restaurant, Supermarkt, Hamam)","über 6 Restaurantstege","Crewwechsel-Transfer"], tip:"Cennet-Marine (früher Iskele) wird empfohlen, Pool nutzbar, Flughafentransfer. Bei Restaurantbesuch an den Stegen sind Wasser und Strom oft inklusive. Von Marmaris rund 20 SM.", vhf:null, web:null },
-      { id:"datca", name:"Datça", type:"Stadthafen ★★", coord:"36°43.5'N, 27°41.2'E", lat:36.725, lon:27.687, region:"Datça-Halbinsel",
+      { id:"datca", name:"Datça", type:"Stadthafen ★★", coord:"36°43.2'N, 27°41.4'E", lat:36.721, lon:27.69, region:"Datça-Halbinsel",
         desc:"Touristischer, aber authentischer Hafenort mit allem Nötigen. Angelegt wird mit dem Heck an der hölzernen Stadtpier, daneben kann man auch in der Bucht ankern. Port of Entry am Ende des Südhafens.",
         depth:"4–6 m", underground:"Schlick", windProtection:"Bucht-geschützt", anlegeart:"Heck zur Stadtpier (römisch-katholisch)",
         facilities:["Supermärkte","Restaurants & Bars","Wasser & Strom","Port of Entry","Badestrand"], tip:"Das Restaurant „Maradona“ hat die beste Hafenaussicht, rund 20 % teurer, aber die türkischen Maultaschen sind die Empfehlung wert. Südlich der Pier ein Badestrand, dahinter ein kleiner Süßwassersee. Nach Knidos rund 25 SM.", vhf:null, web:null },
-      { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", coord:"ca. 36°40'N, 27°30'E", lat:36.667, lon:27.5, region:"Datça-Halbinsel",
+      { id:"palamut", name:"Palamut Limanı", type:"Kleiner Schutzhafen", coord:"36°40.2'N, 27°30.3'E", lat:36.669, lon:27.505, region:"Datça-Halbinsel",
         desc:"Ruhiger, einheimisch geprägter Hafen mit wenig Yachttourismus. Beschauliche, fast verträumte Atmosphäre.",
         depth:"3–4 m im Hafen", underground:"Sand / Schlick", windProtection:"Gut, Schutzhafen", anlegeart:"Muring an erneuerter Kaimauer",
         facilities:["Mini-Supermarkt","Obst, Gemüse, Mandeln, Feigen","mehrere Restaurants","kostenlose Duschen im Lokal"], tip:"Die Einfahrt war flach (ältere Angabe ~2,3 m, 2017 auf 4 m ausgebaggert). Trotzdem sehr langsam einlaufen und den Tiefenmesser beobachten. Von Knidos rund 6 SM.", vhf:null, web:null },
-      { id:"mersincik", name:"Mersincik", type:"Einsamer Naturankerplatz ★★★", coord:"ca. 36°41'N, 27°20'E", lat:36.683, lon:27.333, region:"Datça-Halbinsel",
+      { id:"mersincik", name:"Mersincik", type:"Einsamer Naturankerplatz ★★★", coord:"36°45.1'N, 27°28.6'E", lat:36.751, lon:27.477, region:"Datça-Halbinsel",
         desc:"Abgeschiedene Bucht mit langem Kiesstrand, grüner Ebene voller Zitrusbäume und schroffen Bergwänden. Kaum ein Dutzend Häuser, ansonsten reine Natur.",
         depth:"5–15 m", underground:"Sand / Fels", windProtection:"Gut gegen N/NW", anlegeart:"Anker, eventuell Landleine",
         facilities:["Kein Restaurant","gelegentlich Fischer mit Frischfang"], tip:"Ideal für echte Einsamkeit, Versorgung muss man mitbringen. Nur rund 2 SM westlich von Knidos.", vhf:null, web:null },
-      { id:"hayit", name:"Hayıt Bükü", type:"Ankerbucht mit Anleger", coord:"ca. 36°35'N, 27°28'E", lat:36.583, lon:27.467, region:"Datça-Halbinsel",
+      { id:"hayit", name:"Hayıt Bükü", type:"Ankerbucht mit Anleger", coord:"ca. 36°37.9'N, 27°32.7'E", lat:36.632, lon:27.545, region:"Datça-Halbinsel",
         desc:"Geschützte Bucht an der Südküste der Datça-Halbinsel mit Restaurantanleger. Angenehmer Stopp auf dem Weg um die Halbinsel.",
         depth:"5–12 m", underground:"Sand", windProtection:"Gut gegen Meltemi (NW)", anlegeart:"Anker oder Restaurantanleger",
         facilities:["Restaurant mit Anleger"], tip:"Durch die Südlage gut vor dem Nordwestwind geschützt.", vhf:null, web:null },
-      { id:"knidos", name:"Knidos", type:"Antiker Naturhafen ★★★★", coord:"36°41.1'N, 27°22.5'E", lat:36.685, lon:27.375, region:"Endpunkt / Wendepunkt",
+      { id:"knidos", name:"Knidos", type:"Antiker Naturhafen ★★★★", coord:"36°41.0'N, 27°22.7'E", lat:36.683, lon:27.378, region:"Endpunkt / Wendepunkt",
         desc:"Highlight des Törns: ein antiker Naturhafen an der Westspitze mit Theater direkt am Wasser, Akropolis, Odeon und Leuchtturm. Einzigartiger Blick auf beide Hafenbecken.",
         depth:"6–14 m im Südhafen", underground:"Hart und steinig (gut setzen und prüfen!)", windProtection:"Südhafen schützt bei vorherrschendem NW", anlegeart:"Heck anlegen mit Vorausanker, bei Andrang Landleine",
         facilities:["Gemeindesteg (Gebühr)","Theater, Akropolis, Odeon","Ruinen-Eintritt ca. 10 TL","kaum Versorgung"], tip:"Achtung: Die Nordmole ist komplett überspült und schwer erkennbar, die Einfahrt zwischen den Molen ist ca. 150 m breit. Restaurant Aphrodite eher schwach und teuer, eigene Verpflegung mitbringen. Bei Meltemi das Westkap frühmorgens runden.", vhf:null, web:null },
@@ -369,20 +369,20 @@
 
     /* Etappen: jede Etappe ist eine Fahrt von -> nach mit eigenen Meilen */
     const STAGES_SEED = [
-      { id:"s1",  dateISO:"2026-07-11", von:"Fethiye",      nach:"Cleopatra's Bath Bay", nachId:"cleopatra",   miles:0, note:"Start & Einklarieren in Fethiye, danach kurze erste Etappe", log:"" },
+      { id:"s1",  dateISO:"2026-07-11", von:"Fethiye",      nach:"Cleopatra's Bath Bay", nachId:"cleopatra",   miles:0, note:"Start & Bootsübernahme in Fethiye, danach kurze erste Etappe", log:"" },
       { id:"s2",  dateISO:"2026-07-12", von:"Cleopatra",    nach:"Göcek",                nachId:"goecek",      miles:0, note:"Julia kommt dazu", log:"" },
       { id:"s3",  dateISO:"2026-07-13", von:"Göcek",        nach:"Ekincik",              nachId:"ekincik",     miles:0, note:"", log:"" },
       { id:"s4",  dateISO:"2026-07-14", von:"Ekincik",      nach:"Bozukkale",            nachId:"bozukkale",   miles:0, note:"", log:"" },
       { id:"s5",  dateISO:"2026-07-15", von:"Bozukkale",    nach:"Dirsek Bükü",          nachId:"dirsek",      miles:0, note:"", log:"" },
       { id:"s6",  dateISO:"2026-07-16", von:"Dirsek Bükü",  nach:"Selimiye Koyu",        nachId:"selimiye",    miles:0, note:"", log:"" },
       { id:"s7",  dateISO:"2026-07-17", von:"Selimiye",     nach:"Datça",                nachId:"datca",       miles:0, note:"Crewwechsel: Malte & Melina ab, Kathi & Jonas dazu", log:"" },
-      { id:"s8",  dateISO:"2026-07-18", von:"Datça",        nach:"Knidos",               nachId:"knidos",      miles:0, note:"Ben reist ab · Highlight & Wendepunkt", log:"" },
+      { id:"s8",  dateISO:"2026-07-18", von:"Datça",        nach:"Knidos",               nachId:"knidos",      miles:0, note:"Ben reist ab", log:"" },
       { id:"s9",  dateISO:"2026-07-19", von:"Knidos",       nach:"Palamut Limanı",       nachId:"palamut",     miles:0, note:"", log:"" },
       { id:"s10", dateISO:"2026-07-20", von:"Palamut",      nach:"Hayıt Bükü",           nachId:"hayit",       miles:0, note:"", log:"" },
       { id:"s11", dateISO:"2026-07-21", von:"Hayıt Bükü",   nach:"Mersincik",            nachId:"mersincik",   miles:0, note:"", log:"" },
       { id:"s12", dateISO:"2026-07-22", von:"Mersincik",    nach:"Bencik Bay",           nachId:"bencik",      miles:0, note:"", log:"" },
       { id:"s13", dateISO:"2026-07-23", von:"Bencik Bay",   nach:"Göcek",                nachId:"goecek",      miles:0, note:"Längere Etappe zurück", log:"" },
-      { id:"s14", dateISO:"2026-07-24", von:"Göcek",        nach:"Fethiye",              nachId:"fethiye",     miles:0, note:"Letzte Nacht vor dem Ausklarieren", log:"" }
+      { id:"s14", dateISO:"2026-07-24", von:"Göcek",        nach:"Fethiye",              nachId:"fethiye",     miles:0, note:"Letzte Nacht vor der Bootsrückgabe", log:"" }
     ];
 
     /* Listen-Startbelegung. header:true = Zwischenüberschrift (nicht abhakbar) */
@@ -437,6 +437,10 @@
       mk("Wasser & Spaß", true),
       mk("Wasserdichter Drybag"), mk("Schnorchel & Taucherbrille")
     ];
+    const DEFECTS_SEED = [
+      mk("Bei Übernahme notiert", true),
+      mk("Beim Auschecken klären", true)
+    ];
     const BOATCHECK_SEED = [
       mk("Rettungswesten geprüft"), mk("Seeventile kontrolliert"), mk("Bilgepumpe funktioniert"), mk("Motoröl & Kühlwasser geprüft"),
       mk("Diesel aufgefüllt"), mk("Plotter / Navigation an"), mk("UKW-Funk auf Kanal 16 getestet"), mk("Ankerwinsch & Kette geprüft"),
@@ -455,6 +459,8 @@
     const IcBasket = (p) => <Svg {...p}><path d="m5 9 3-5" /><path d="m19 9-3-5" /><path d="M3 9h18l-1.5 9.5a2 2 0 0 1-2 1.5H6.5a2 2 0 0 1-2-1.5L3 9Z" /><path d="M10 13v3" /><path d="M14 13v3" /></Svg>;
     const IcCompass = (p) => <Svg {...p}><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" /></Svg>;
     const IcAnchor = (p) => <Svg {...p}><circle cx="12" cy="5" r="2" /><path d="M12 7v14" /><path d="M5 12H3a9 9 0 0 0 18 0h-2" /><path d="M8 11l4-4 4 4" /></Svg>;
+    const IcWrench = (p) => <Svg {...p}><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L4 17l3 3 5.5-5.3a4 4 0 0 0 5.2-5.4l-2.5 2.5-2.3-2.3z" /></Svg>;
+    const IcShare = (p) => <Svg {...p}><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" /></Svg>;
     const IcWind = (p) => <Svg {...p}><path d="M3 8h10a3 3 0 1 0-3-3" /><path d="M3 12h14a3 3 0 1 1-3 3" /><path d="M3 16h7a2.5 2.5 0 1 1-2.5 2.5" /></Svg>;
     const IcMusic = (p) => <Svg {...p}><path d="M9 18V6l10-2v12" /><circle cx="6" cy="18" r="3" /><circle cx="16" cy="16" r="3" /></Svg>;
     const IcDice = (p) => <Svg {...p}><rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1" fill="currentColor" /><circle cx="15.5" cy="8.5" r="1" fill="currentColor" /><circle cx="12" cy="12" r="1" fill="currentColor" /><circle cx="8.5" cy="15.5" r="1" fill="currentColor" /><circle cx="15.5" cy="15.5" r="1" fill="currentColor" /></Svg>;
@@ -567,7 +573,7 @@
 
     function TodayStage(props) {
       const d = useDay();
-      const [stages] = useLocalStorage("tm_stages_v3", STAGES_SEED);
+      const [stages] = useLocalStorage("tm_stages_v4", STAGES_SEED);
       const stage = (d.index >= 0 && d.index < stages.length) ? stages[d.index] : null;
       return (
         <Card className="p-5">
@@ -588,13 +594,28 @@
       );
     }
 
+    function ConsentEmbed(props) {
+      const [consent, setConsent] = useLocalStorage("tm_ext_consent", false);
+      if (consent) return props.children;
+      return (
+        <div className="bg-wolkenweiss rounded-xl p-4 text-center">
+          <div className="text-sm font-medium text-tiefblau mb-1">{props.title}</div>
+          <div className="text-xs text-steingrau mb-3">{props.note}</div>
+          <button onClick={() => setConsent(true)} className="inline-flex items-center gap-2 bg-tiefblau text-white text-sm font-medium rounded-xl px-4 py-2 active:scale-95 transition">Inhalt laden</button>
+          <div className="text-[10px] text-steingrau mt-2">Bleibt danach aktiv. Widerruf unten im Datenschutz-Hinweis.</div>
+        </div>
+      );
+    }
+
     function WeatherCard() {
       const link = "https://www.windy.com/?" + WEATHER_LAT + "," + WEATHER_LON + ",9";
       const embed = "https://embed.windy.com/embed2.html?lat=" + WEATHER_LAT + "&lon=" + WEATHER_LON + "&detailLat=" + WEATHER_LAT + "&detailLon=" + WEATHER_LON + "&zoom=8&level=surface&overlay=wind&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=bft&metricTemp=%C2%B0C&radarRange=-1";
       return (
         <Card className="p-5">
           <SectionHead bg="bg-meeresblau" icon={<IcWind size={20} />} title="Wind & Wetter" sub="Revier Fethiye–Datça" />
-          <iframe title="Windy Wind & Wetter" src={embed} width="100%" height="340" frameBorder="0" loading="lazy" style={{ borderRadius:"12px", display:"block" }} />
+          <ConsentEmbed title="Windkarte von Windy.com" note="Beim Laden können Daten (u. a. deine IP) an Windy.com übertragen werden.">
+            <iframe title="Windy Wind & Wetter" src={embed} width="100%" height="340" frameBorder="0" loading="lazy" style={{ borderRadius:"12px", display:"block" }} />
+          </ConsentEmbed>
           <a href={link} target="_blank" rel="noopener noreferrer" className="mt-3 w-full flex items-center justify-center gap-2 bg-meeresblau text-white font-medium rounded-xl py-2.5 active:scale-[0.98] transition"><IcExternal size={18} /> In Windy.com öffnen</a>
         </Card>
       );
@@ -605,6 +626,8 @@
       const [history, setHistory] = useLocalStorage("tm_kitchen_history", []);
       const [rolling, setRolling] = useState(false);
       const [flash, setFlash] = useState(null);
+      const [pending, setPending] = useState(null);
+      const [confirmed, setConfirmed] = useState(false);
       const [creditOpen, setCreditOpen] = useState(false);
       const night = d.inTrip ? d.dayNumber : 1;
       const present = crewForNight(night);
@@ -612,21 +635,31 @@
       function roll() {
         const c = counts(); const max = Math.max.apply(null, present.map(n => c[n])); const weighted = [];
         present.forEach(n => { const w = (max - c[n]) + 1; for (let i = 0; i < w; i++) weighted.push(n); });
-        setRolling(true); let ticks = 0;
+        setRolling(true); setConfirmed(false); setPending(null); let ticks = 0;
         const iv = setInterval(() => {
           setFlash(present[Math.floor(Math.random()*present.length)]); ticks++;
-          if (ticks > 12) { clearInterval(iv); const pick = weighted[Math.floor(Math.random()*weighted.length)]; setFlash(pick); setRolling(false); setHistory(history.concat([{ name: pick, night: night, ts: Date.now() }])); }
+          if (ticks > 12) { clearInterval(iv); const pick = weighted[Math.floor(Math.random()*weighted.length)]; setFlash(pick); setRolling(false); setPending(pick); }
         }, 70);
       }
+      function confirmWash() { if (!pending) return; setHistory(history.concat([{ name: pending, night: night, ts: Date.now() }])); setConfirmed(true); setPending(null); }
       function credit(name) { setHistory(history.concat([{ name: name, night: night, ts: Date.now() }])); setCreditOpen(false); }
       const c = counts();
       return (
         <Card className="p-5">
           <SectionHead bg="bg-sonnenorange" icon={<IcUtensils size={20} />} title="Abwasch-Dienst" sub={"Anwesend: " + present.length + " Personen"} />
           <div className="text-center py-4 bg-wolkenweiss rounded-xl mb-3">
-            <div className="text-xs text-steingrau mb-1">{flash ? (rolling ? "wird ausgewürfelt …" : "Heute spült") : "Noch nicht gewürfelt"}</div>
+            <div className="text-xs text-steingrau mb-1">{flash ? (rolling ? "wird ausgewürfelt …" : (confirmed ? "hat abgewaschen ✓" : (pending ? "ausgewürfelt" : "Heute spült"))) : "Noch nicht gewürfelt"}</div>
             <div className="text-2xl font-semibold text-tiefblau min-h-[2rem]">{flash || "—"}</div>
           </div>
+          {pending && !rolling && (
+            <div className="mb-3 p-3 bg-sonnenorange/15 rounded-xl">
+              <div className="text-xs text-tiefblau mb-2 text-center">Hat <span className="font-semibold">{pending}</span> wirklich abgewaschen? Erst dann wird es gezählt.</div>
+              <div className="flex gap-2">
+                <button onClick={confirmWash} className="flex-1 flex items-center justify-center gap-1.5 bg-tuerkis text-white text-sm font-medium rounded-xl py-2 active:scale-95 transition"><IcCheck size={16} /> Ja, hat abgewaschen</button>
+                <button onClick={roll} className="flex-1 bg-white text-steingrau text-sm rounded-xl py-2 active:scale-95 transition">Neu würfeln</button>
+              </div>
+            </div>
+          )}
           <button onClick={roll} disabled={rolling} className="w-full flex items-center justify-center gap-2 bg-tiefblau text-white font-medium rounded-xl py-3 active:scale-[0.98] transition disabled:opacity-60"><IcDice size={20} /> {rolling ? "Würfelt …" : "Abwasch auswürfeln"}</button>
           <div className="text-[11px] text-steingrau text-center mt-2">Fair gewichtet: Wer seltener dran war, wird häufiger gezogen.</div>
           <div className="mt-4">
@@ -652,7 +685,9 @@
         <Card className="p-5">
           <SectionHead bg="bg-tuerkis" icon={<IcMusic size={20} />} title="Bordmusik" />
           {valid ? (
-            <iframe title="Spotify Playlist" style={{ borderRadius: "12px" }} src={"https://open.spotify.com/embed/playlist/" + SPOTIFY_PLAYLIST_ID + "?utm_source=generator"} width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" />
+            <ConsentEmbed title="Playlist von Spotify" note="Beim Laden können Daten (u. a. deine IP) an Spotify übertragen werden. Spotify setzt eigene Cookies.">
+              <iframe title="Spotify Playlist" style={{ borderRadius: "12px" }} src={"https://open.spotify.com/embed/playlist/" + SPOTIFY_PLAYLIST_ID + "?utm_source=generator"} width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" />
+            </ConsentEmbed>
           ) : <div className="text-sm text-steingrau bg-wolkenweiss rounded-xl p-4">Noch keine Playlist hinterlegt.</div>}
         </Card>
       );
@@ -673,7 +708,7 @@
       const q = COMPASS_QUESTIONS[order[pos]];
       return (
         <Card className="p-5">
-          <SectionHead bg="bg-tuerkis" icon={<IcSpark size={20} />} title="Kompass der Fragen" sub="Karten zum Kennenlernen · wischen" />
+          <SectionHead bg="bg-tuerkis" icon={<IcSpark size={20} />} title="Kompass der Fragen" />
           <div onTouchStart={onStart} onTouchMove={onMove} onTouchEnd={onEnd}
                className="rounded-2xl p-6 text-center select-none"
                style={{ background:"linear-gradient(135deg,#147A8B,#2BB9B1)", transform:"translateX(" + dx + "px) rotate(" + (dx*0.02) + "deg)", transition: startX.current == null ? "transform .25s ease" : "none", touchAction:"pan-y" }}>
@@ -738,6 +773,7 @@
             <div className="w-28"><label className="text-xs text-steingrau">Meilen (SM)</label><input type="number" inputMode="decimal" value={miles} onChange={(e) => setMiles(e.target.value)} className={field} /></div>
           </div>
           <div><label className="text-xs text-steingrau">Notiz</label><input value={note} onChange={(e) => setNote(e.target.value)} className={field} placeholder="z. B. Crewwechsel" /></div>
+          <div className="text-[11px] text-steingrau bg-wolkenweiss rounded-lg px-3 py-2">Änderungen an dieser Etappe gelten für die ganze Crew.</div>
           <div className="flex gap-2 pt-1">
             <button onClick={save} className="flex-1 bg-tiefblau text-white font-medium rounded-xl py-2.5 active:scale-[0.98] transition">Speichern</button>
             <button onClick={props.onCancel} className="px-4 bg-wolkenweiss text-steingrau rounded-xl">Abbrechen</button>
@@ -790,7 +826,7 @@
     }
     function TabEtappen() {
       const d = useDay();
-      const [stages, setStages] = useLocalStorage("tm_stages_v3", STAGES_SEED);
+      const [stages, setStages] = useLocalStorage("tm_stages_v4", STAGES_SEED);
       function saveAt(i, ns) { setStages(stages.map((s, k) => k === i ? ns : s)); }
       function del(i) { setStages(stages.filter((s, k) => k !== i)); }
       function move(i, dir) { const j = i + dir; if (j < 0 || j >= stages.length) return; const a = stages.slice(); const t = a[i]; a[i] = a[j]; a[j] = t; setStages(a); }
@@ -802,6 +838,7 @@
       const totalMiles = stages.reduce((a, s) => a + (Number(s.miles) || 0), 0);
       return (
         <div className="space-y-3">
+          <div className="text-xs text-steingrau bg-white rounded-xl p-3">Vorläufige Törnplanung als Orientierung. Route und Übernachtungen passen Skipper und Crew je nach Wetter und Lust laufend an.</div>
           {stages.map((s, i) => <StageCard key={s.id} stage={s} num={i + 1} isToday={d.index === i} first={i === 0} last={i === stages.length - 1} onSave={(ns) => saveAt(i, ns)} onDelete={() => del(i)} onUp={() => move(i, -1)} onDown={() => move(i, 1)} />)}
           <Card className="p-4 flex items-center justify-between">
             <span className="text-sm text-steingrau">Gesamt</span>
@@ -819,6 +856,19 @@
       const h = props.harbor; if (!h) return null;
       const windy = "https://www.windy.com/?" + h.lat + "," + h.lon + ",10";
       const Fact = (f) => <div><div className="text-xs text-steingrau">{f.label}</div><div className="text-tiefblau">{f.value}</div></div>;
+      function share() {
+        const parts = [h.name, h.type];
+        if (h.coord && h.coord.indexOf("unbestätigt") < 0) parts.push("Koordinaten: " + h.coord);
+        parts.push("Anlegen: " + h.anlegeart);
+        parts.push("Tiefe: " + h.depth + " · Ankergrund: " + h.underground + " · Windschutz: " + h.windProtection);
+        if (h.vhf) parts.push("VHF: " + h.vhf);
+        parts.push("Tipp: " + h.tip);
+        parts.push("Karte: https://www.openstreetmap.org/?mlat=" + h.lat + "&mlon=" + h.lon + "#map=13/" + h.lat + "/" + h.lon);
+        const text = parts.join("\n");
+        if (navigator.share) { navigator.share({ title: h.name + " · TörnMate", text: text }).catch(function () {}); }
+        else if (navigator.clipboard) { navigator.clipboard.writeText(text).then(function () { alert("Infos zu " + h.name + " kopiert. Jetzt einfügen und verschicken."); }, function () { alert(text); }); }
+        else { alert(text); }
+      }
       return (
         <div className="space-y-3 text-sm">
           <p className="text-steingrau">{h.desc}</p>
@@ -833,9 +883,10 @@
             <div className="flex flex-wrap gap-1.5">{h.facilities.map((f, i) => <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-seegruen/40 text-tiefblau">{f}</span>)}</div>
           </div>
           <div className="bg-sand/60 rounded-xl p-3"><div className="text-xs font-semibold text-tiefblau uppercase tracking-wide mb-1">Tipp</div><p className="text-tiefblau/80">{h.tip}</p></div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <a href={windy} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-meeresblau font-medium"><IcWind size={16} /> Wind hier ansehen</a>
             {h.web && <a href={h.web} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-meeresblau font-medium"><IcExternal size={16} /> Marina-Website</a>}
+            <button onClick={share} className="inline-flex items-center gap-1.5 text-meeresblau font-medium"><IcShare size={16} /> Teilen</button>
           </div>
         </div>
       );
@@ -864,8 +915,10 @@
       return (
         <div className="space-y-3">
           <Card className="p-3 overflow-hidden">
-            <iframe title="Revierkarte" src="revierkarte.html?v=3" loading="lazy" style={{ width:"100%", height:"440px", border:"0", borderRadius:"12px", display:"block" }} />
-            <div className="text-[11px] text-steingrau mt-2 px-1">Karte © OpenStreetMap-Mitwirkende. Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</div>
+            <ConsentEmbed title="Revierkarte (OpenStreetMap)" note="Beim Laden werden Kartendaten von OpenStreetMap und Leaflet (jsDelivr) geladen, dabei kann deine IP an diese Dienste übertragen werden.">
+              <iframe title="Revierkarte" src="revierkarte.html?v=4" loading="lazy" allow="geolocation" style={{ width:"100%", height:"440px", border:"0", borderRadius:"12px", display:"block" }} />
+            </ConsentEmbed>
+            <div className="text-[11px] text-steingrau mt-2 px-1">Karte © OpenStreetMap-Mitwirkende. Marker nach Sektionen eingefärbt. Nur zur Orientierung, nicht zur Navigation.</div>
           </Card>
 
           <div className="flex items-center gap-2 bg-white rounded-xl px-3 shadow-sm">
@@ -921,25 +974,38 @@
       const [draft, setDraft] = useState("");
       const [showDone, setShowDone] = useState(false);
       const [cat, setCat] = useState(null);
+      const [bulkOpen, setBulkOpen] = useState(false);
+      const [bulk, setBulk] = useState("");
       const headers = items.filter(it => it.header);
       const effectiveCat = (cat !== null) ? cat : (headers[0] ? headers[0].id : "");
       function toggle(id) { setItems(items.map(it => it.id === id ? Object.assign({}, it, { done: !it.done }) : it)); }
+      function insertInto(arr, newItems, targetCat) {
+        if (headers.length > 0 && targetCat) {
+          let hi = -1;
+          for (let i = 0; i < arr.length; i++) { if (arr[i].id === targetCat) { hi = i; break; } }
+          if (hi < 0) { return arr.concat(newItems); }
+          let j = hi + 1; while (j < arr.length && !arr[j].header) j++;
+          const out = arr.slice(); out.splice.apply(out, [j, 0].concat(newItems)); return out;
+        }
+        return arr.concat(newItems);
+      }
       function add() {
         const t = draft.trim(); if (!t) return;
         const item = { id: "u" + Date.now(), text: t, done: false, header: false };
-        if (headers.length > 0 && effectiveCat) {
-          const arr = items.slice();
-          let hi = -1;
-          for (let i = 0; i < arr.length; i++) { if (arr[i].id === effectiveCat) { hi = i; break; } }
-          if (hi < 0) { arr.push(item); }
-          else { let j = hi + 1; while (j < arr.length && !arr[j].header) j++; arr.splice(j, 0, item); }
-          setItems(arr);
-        } else {
-          setItems(items.concat([item]));
-        }
-        setDraft("");
+        setItems(insertInto(items, [item], effectiveCat)); setDraft("");
       }
-      function remove(id) { setItems(items.filter(it => it.id !== id)); }
+      function addBulk() {
+        const lines = bulk.split("\n").map(s => s.trim()).filter(Boolean);
+        if (lines.length === 0) { setBulkOpen(false); return; }
+        const newItems = lines.map((t, i) => ({ id: "u" + Date.now() + "_" + i, text: t, done: false, header: false }));
+        setItems(insertInto(items, newItems, effectiveCat)); setBulk(""); setBulkOpen(false);
+      }
+      function remove(it) {
+        const msg = it.header
+          ? "Kategorie „" + it.text + "\" für die ganze Crew löschen?"
+          : "„" + it.text + "\" für die ganze Crew löschen? Tipp: Du kannst den Eintrag auch einfach abhaken statt ihn zu löschen.";
+        if (confirm(msg)) setItems(items.filter(x => x.id !== it.id));
+      }
       const real = items.filter(it => !it.header);
       const done = real.filter(it => it.done).length;
       const visible = items.filter(it => it.header || !it.done || showDone);
@@ -952,22 +1018,33 @@
               {headers.map(h => <option key={h.id} value={h.id}>{h.text}</option>)}
             </select>
           )}
-          <div className="flex gap-2 mb-3">
+          <div className="flex gap-2 mb-2">
             <input value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") add(); }} placeholder="Hinzufügen …" className={"flex-1 " + field} />
             <button onClick={add} className="bg-tuerkis text-white rounded-xl px-3 active:scale-95 transition"><IcPlus size={20} /></button>
           </div>
+          {!bulkOpen && <button onClick={() => setBulkOpen(true)} className="text-xs text-meeresblau mb-3">Ganze Liste einfügen</button>}
+          {bulkOpen && (
+            <div className="mb-3 p-3 bg-wolkenweiss rounded-xl">
+              <div className="text-xs text-steingrau mb-1.5">Mehrere Einträge, eine Zeile pro Eintrag{headers.length > 0 ? " (kommt in die oben gewählte Kategorie)" : ""}:</div>
+              <textarea value={bulk} onChange={(e) => setBulk(e.target.value)} rows={5} placeholder={"z. B.\nRettungswesten prüfen\nFeuerlöscher\nSeekarten"} className={"w-full " + field} />
+              <div className="flex gap-2 mt-2">
+                <button onClick={addBulk} className="flex-1 bg-tuerkis text-white text-sm font-medium rounded-xl py-2 active:scale-95 transition">Alle hinzufügen</button>
+                <button onClick={() => { setBulkOpen(false); setBulk(""); }} className="flex-1 bg-white text-steingrau text-sm rounded-xl py-2">Abbrechen</button>
+              </div>
+            </div>
+          )}
           <div className="space-y-1.5">
             {items.length === 0 && <div className="text-sm text-steingrau">Noch nichts auf der Liste.</div>}
             {visible.map(it => it.header ? (
               <div key={it.id} className="flex items-center justify-between pt-3 pb-1">
                 <span className="text-xs font-semibold text-steingrau uppercase tracking-wide">{it.text}</span>
-                <button onClick={() => remove(it.id)} className="text-steingrau/40 hover:text-sonnenorange p-1"><IcTrash size={14} /></button>
+                <button onClick={() => remove(it)} className="text-steingrau/40 hover:text-sonnenorange p-1"><IcTrash size={14} /></button>
               </div>
             ) : (
               <div key={it.id} className="flex items-center gap-3">
                 <button onClick={() => toggle(it.id)} className={"shrink-0 w-6 h-6 rounded-md flex items-center justify-center border-2 transition " + (it.done ? "bg-tuerkis border-tuerkis text-white" : "border-steingrau/40 text-transparent")}><IcCheck size={16} /></button>
                 <span className={"flex-1 text-sm " + (it.done ? "line-through text-steingrau" : "text-tiefblau")}>{it.text}</span>
-                <button onClick={() => remove(it.id)} className="text-steingrau/50 hover:text-sonnenorange p-1"><IcTrash size={16} /></button>
+                <button onClick={() => remove(it)} className="text-steingrau/50 hover:text-sonnenorange p-1"><IcTrash size={16} /></button>
               </div>
             ))}
           </div>
@@ -999,6 +1076,10 @@
           </Collapsible>
           <Collapsible bg="bg-meeresblau" icon={<IcAnchor size={18} />} title="Mitbringen – Crew-Ausrüstung" right={scopeBadge("shared")}>
             <CheckList storageKey="tm_crewgear_v2" seed={CREWGEAR_SEED} />
+          </Collapsible>
+          <Collapsible bg="bg-sonnenorange" icon={<IcWrench size={18} />} title="Mängel & Auscheck-Themen" right={scopeBadge("shared")}>
+            <div className="text-xs text-steingrau mb-3">Schäden oder Auffälligkeiten am Boot festhalten, die bei der Übernahme aufgefallen sind oder bei der Rückgabe geklärt werden sollen. So gibt es am Ende keine Diskussion.</div>
+            <CheckList storageKey="tm_defects_v1" seed={DEFECTS_SEED} />
           </Collapsible>
           <Collapsible bg="bg-steingrau" icon={<IcCheck size={18} />} title="Packliste" right={scopeBadge("individual")}>
             <CheckList storageKey="tm_packing_v3" seed={PACK_SEED} />
@@ -1088,16 +1169,23 @@
        ============================================================ */
     function LegalFooter() {
       const [open, setOpen] = useState(false);
+      const [consent, setConsent] = useLocalStorage("tm_ext_consent", false);
       return (
         <div className="mt-6 mb-2 text-center">
           <button onClick={() => setOpen(!open)} className="text-xs text-steingrau underline">Rechtlicher Hinweis & Datenschutz</button>
           {open && (
             <div className="mt-2 text-xs text-steingrau space-y-2 bg-white rounded-xl p-4 text-left">
-              <p>Diese App ist eine private, nicht-kommerzielle Anwendung und ausschließlich für den persönlichen Gebrauch einer geschlossenen Reisegruppe gedacht.</p>
-              <p>Es werden keine personenbezogenen Daten an Dritte weitergegeben oder auf fremden Servern abgelegt. Alle Eingaben verbleiben lokal im Browser (localStorage) auf dem jeweiligen Gerät.</p>
-              <p>Die App ist nicht öffentlich zugänglich und richtet sich nur an eingeladene Nutzerinnen und Nutzer.</p>
-              <p>Sämtliche Inhalte wurden selbst verfasst oder aus öffentlich zugänglichen Quellen zusammengetragen und in eigenen Worten neu formuliert. Es werden keine urheberrechtlich geschützten Texte oder Bilder Dritter verwendet.</p>
-              <p><span className="font-semibold text-tiefblau">Interaktive Karte:</span> Die Revierkarte nutzt die Open-Source-Bibliothek Leaflet (© Volodymyr Agafonkin und Mitwirkende), die unter der BSD-2-Clause-Lizenz steht. Deren Nutzung und Weiterverbreitung ist erlaubt, sofern die Lizenz- und Copyright-Hinweise erhalten bleiben; die vollständige Lizenz ist unter leafletjs.com verfügbar. Das Kartenmaterial stammt von OpenStreetMap (© OpenStreetMap-Mitwirkende) und steht unter der Open Database License (ODbL). Die eingezeichnete Route ist schematisch und nicht zur Navigation geeignet.</p>
+              <p>Diese App ist eine private, nicht-kommerzielle Anwendung und ausschließlich für den persönlichen Gebrauch einer geschlossenen Reisegruppe gedacht (privater bzw. familiärer Bereich).</p>
+              <p><span className="font-semibold text-tiefblau">Deine Eingaben:</span> Alle Inhalte (Listen, Etappen, Logbuch, Abwasch-Verlauf) werden ausschließlich lokal im Speicher deines Browsers (localStorage) auf deinem Gerät abgelegt. Es gibt keine Nutzerkonten, keine Server, kein Tracking und keine Analyse. Diese lokale Speicherung dient nur der Funktion der App. Über die Einstellungen deines Browsers kannst du diese Daten jederzeit löschen.</p>
+              <p><span className="font-semibold text-tiefblau">Keine eigenen Cookies:</span> Die App selbst setzt keine Cookies und verwendet keine Werbe- oder Statistik-Dienste.</p>
+              <p><span className="font-semibold text-tiefblau">Externe Inhalte:</span> An einigen Stellen können Inhalte Dritter eingebettet werden: die Playlist von Spotify, die Windkarte von Windy.com sowie die Revierkarte (Kartenmaterial von OpenStreetMap, Programmbibliothek Leaflet über den CDN jsDelivr). Diese Inhalte werden erst geladen, nachdem du aktiv auf „Inhalt laden" getippt hast. Beim Laden kann deine IP-Adresse an den jeweiligen Anbieter übertragen werden, und die Anbieter können eigene Cookies setzen. Es gelten deren Datenschutzbestimmungen (spotify.com, windy.com, openstreetmap.org).</p>
+              <p><span className="font-semibold text-tiefblau">Standort:</span> Auf der Karte kannst du optional deine eigene Position anzeigen lassen. Dein Gerät fragt dann um Erlaubnis. Die Position wird nur direkt auf der Karte in deinem Browser angezeigt, nirgends gespeichert und an niemanden übertragen.</p>
+              <p><span className="font-semibold text-tiefblau">Inhalte:</span> Sämtliche Texte wurden selbst verfasst oder aus öffentlich zugänglichen Quellen zusammengetragen und in eigenen Worten neu formuliert. Die Revierangaben ersetzen keine amtlichen Seekarten und sind nicht zur Navigation geeignet.</p>
+              <p><span className="font-semibold text-tiefblau">Karte / Lizenzen:</span> Leaflet (© Volodymyr Agafonkin und Mitwirkende, BSD-2-Clause-Lizenz, leafletjs.com), Kartenmaterial © OpenStreetMap-Mitwirkende (Open Database License, ODbL).</p>
+              <div className="pt-1">
+                <button onClick={() => setConsent(!consent)} className="text-xs text-meeresblau underline">{consent ? "Zustimmung zu externen Inhalten widerrufen" : "Externe Inhalte sind aktuell nicht geladen"}</button>
+              </div>
+              <p className="text-[10px] text-steingrau/80 pt-1">Hinweis: Dies ist kein Rechtstext von Juristen, sondern eine sorgfältige Selbsteinschätzung für den privaten Gebrauch.</p>
             </div>
           )}
         </div>
